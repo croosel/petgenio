@@ -4,16 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import type {
-  EntryMode, ScreenIndex, AIStyle, Softness, Size, Scent, BoxColor,
+  ScreenIndex, AIStyle, Softness, Size, Scent, BoxColor,
   ProductConfig, PetData,
 } from '@/flows/shared/types';
-import { MOCK_PET, MOCK_CONFIG, PERSONALITY_TAGS, BREEDS } from '@/flows/shared/mock-data';
-
-// ─── Screen names for progress bar ───
-const SCREEN_LABELS = [
-  'Home', 'Pet Profile', 'Costume Show', 'Result',
-  'Configure', 'Checkout', 'Confirmed',
-];
+import { MOCK_PET, MOCK_CONFIG } from '@/flows/shared/mock-data';
 
 // ─── Costume Show Templates ───
 const COSTUME_TEMPLATES = [
@@ -77,9 +71,8 @@ function brandColor() {
 
 export default function CoreFunnel() {
   const [screen, setScreen] = useState<ScreenIndex>(0);
-  const [mode] = useState<EntryMode>('playful');
   const [pet, setPet] = useState<PetData>({ ...MOCK_PET });
-  const [style, setStyle] = useState<AIStyle>('pixar');
+  const [style] = useState<AIStyle>('pixar');
   const [config, setConfig] = useState<ProductConfig>({ ...MOCK_CONFIG });
   const [email, setEmail] = useState('');
   const [generating, setGenerating] = useState(false);
