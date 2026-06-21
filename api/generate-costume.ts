@@ -47,8 +47,8 @@ function validateBase64Photo(photo: string): boolean {
   if (!photo || typeof photo !== 'string') return false;
   // Must be a data URL with image media type
   if (!photo.startsWith('data:image/')) return false;
-  // Size check: max 4MB base64 (Vercel body limit is 4.5MB)
-  if (photo.length > 4 * 1024 * 1024) return false;
+  // Size check: max 2MB base64 (frontend compresses to ~200KB, but allow margin)
+  if (photo.length > 2 * 1024 * 1024) return false;
   return true;
 }
 
@@ -77,6 +77,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     };
 
     // ── Validate input ──
+    console.log('[generate-costume] Request received:', { costumeId, petName, breed: breed || '(empty)', hasPhoto: !!photo });
+
     if (!costumeId || !COSTUME_PROMPTS[costumeId]) {
       return res.status(400).json({ error: `Invalid costumeId: ${costumeId}` });
     }
@@ -106,7 +108,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // Build the API request body
+    // Build the API request body — standard OpenAI-compatible format
     const requestBody: Record<string, unknown> = {
       model: endpointId,
       prompt,
@@ -115,15 +117,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       response_format: 'b64_json',
     };
 
-    // If photo is provided, include it as a reference for image-to-image
-    if (photo) {
-      // Extract base64 data from data URL
-      const base64Data = photo.split(',')[1];
-      if (base64Data) {
-        requestBody.image = base64Data;
-        requestBody.strength = 0.6; // How much to follow the reference image
-      }
-    }
+    console.log('[generate-costume] Calling Seedream API', {
+      endpointId,
+      promptLength: prompt.length,
+      hasPhoto: !!photo,
+      photoSize: photo ? `${Math.round(photo.length / 1024)}KB` : 'none',
+    });
 
     const apiResponse = await fetch('https://ark.cn-beijing.volces.com/api/v3/images/generations', {
       method: 'POST',
@@ -136,16 +135,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     if (!apiResponse.ok) {
       const errorText = await apiResponse.text();
-      console.error(`Seedream API error ${apiResponse.status}:`, errorText);
+      console.error(`[generate-costume] Seedream API error ${apiResponse.status}:`, errorText.substring(0, 500));
       return res.status(502).json({
         error: `AI generation failed: ${apiResponse.status}`,
-        detail: errorText,
+        detail: errorText.substring(0, 300),
       });
     }
 
     const result = (await apiResponse.json()) as {
       data: Array<{ b64_json?: string; url?: string }>;
     };
+
+    console.log('[generate-costume] Seedream API success:', {
+      hasData: !!result.data,
+      dataLength: result.data?.length || 0,
+      hasB64: !!result.data?.[0]?.b64_json,
+      hasUrl: !!result.data?.[0]?.url,
+    });
 
     if (!result.data?.[0]) {
       return res.status(502).json({ error: 'AI generation returned empty result' });

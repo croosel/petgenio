@@ -9,6 +9,30 @@ import type {
 } from '@/flows/shared/types';
 import { MOCK_PET, MOCK_CONFIG } from '@/flows/shared/mock-data';
 
+// ─── Image Compression (prevent Vercel 4.5MB body limit) ───
+function compressImage(file: File, maxDim = 1024, quality = 0.8): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+      if (width > maxDim || height > maxDim) {
+        const ratio = Math.min(maxDim / width, maxDim / height);
+        width = Math.round(width * ratio);
+        height = Math.round(height * ratio);
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return reject(new Error('Canvas not supported'));
+      ctx.drawImage(img, 0, 0, width, height);
+      resolve(canvas.toDataURL('image/jpeg', quality));
+    };
+    img.onerror = () => reject(new Error('Failed to load image'));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
 // ─── Costume Show Templates ───
 const COSTUME_TEMPLATES = [
   { id: 'royal', emoji: '👑', title: 'Royal Portrait', desc: 'Renaissance oil painting', color: '#7C3AED' },
@@ -300,20 +324,31 @@ function ScreenPetProfile({
         </div>
         {/* Hidden file inputs */}
         <input ref={fileInputRef} type="file" accept="image/*" className="hidden"
-          onChange={e => {
+          onChange={async e => {
             const file = e.target.files?.[0];
             if (!file) return;
-            const reader = new FileReader();
-            reader.onload = () => setPet({ ...pet, photo: reader.result as string });
-            reader.readAsDataURL(file);
+            try {
+              const compressed = await compressImage(file);
+              setPet({ ...pet, photo: compressed });
+            } catch {
+              // fallback: read raw if compression fails
+              const reader = new FileReader();
+              reader.onload = () => setPet({ ...pet, photo: reader.result as string });
+              reader.readAsDataURL(file);
+            }
           }} />
         <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" className="hidden"
-          onChange={e => {
+          onChange={async e => {
             const file = e.target.files?.[0];
             if (!file) return;
-            const reader = new FileReader();
-            reader.onload = () => setPet({ ...pet, photo: reader.result as string });
-            reader.readAsDataURL(file);
+            try {
+              const compressed = await compressImage(file);
+              setPet({ ...pet, photo: compressed });
+            } catch {
+              const reader = new FileReader();
+              reader.onload = () => setPet({ ...pet, photo: reader.result as string });
+              reader.readAsDataURL(file);
+            }
           }} />
         {pet.photo && (
           <div className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50">
