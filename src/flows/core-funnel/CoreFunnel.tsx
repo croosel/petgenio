@@ -78,30 +78,12 @@ export default function CoreFunnel() {
   const [generating, setGenerating] = useState(false);
   const [genProgress, setGenProgress] = useState(0);
   const [selectedCostume, setSelectedCostume] = useState<string | null>(null);
+  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
+  const [genError, setGenError] = useState<string | null>(null);
 
   // ─── Navigation ───
   const next = useCallback(() => setScreen(s => Math.min(s + 1, 6) as ScreenIndex), []);
   const prev = useCallback(() => setScreen(s => Math.max(s - 1, 0) as ScreenIndex), []);
-
-  // ─── AI Generation simulation (Screen 3 = Result) ──
-  const hasGenerated = useRef(false);
-  useEffect(() => {
-    if (screen === 3 && !hasGenerated.current) {
-      hasGenerated.current = true;
-      setGenProgress(0);
-      setGenerating(true);
-      const interval = setInterval(() => {
-        setGenProgress(p => {
-          if (p >= 100) { clearInterval(interval); setGenerating(false); return 100; }
-          return p + 2;
-        });
-      }, 100);
-      return () => clearInterval(interval);
-    }
-    if (screen !== 3) {
-      hasGenerated.current = false;
-    }
-  }, [screen]);
 
   // ─── Progress percentage ───
   const progressPct = ((screen + 1) / 7) * 100;
@@ -144,6 +126,10 @@ export default function CoreFunnel() {
         {screen === 3 && (
           <ScreenResult
             pet={pet} generating={generating} progress={genProgress}
+            setGenerating={setGenerating} setGenProgress={setGenProgress}
+            selectedCostume={selectedCostume}
+            generatedImage={generatedImage} setGeneratedImage={setGeneratedImage}
+            genError={genError} setGenError={setGenError}
             onNext={next}
           />
         )}
@@ -314,12 +300,24 @@ function ScreenPetProfile({
         </div>
         {/* Hidden file inputs */}
         <input ref={fileInputRef} type="file" accept="image/*" className="hidden"
-          onChange={e => { if (e.target.files?.[0]) setPet({ ...pet, photo: 'uploaded.jpg' }); }} />
+          onChange={e => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => setPet({ ...pet, photo: reader.result as string });
+            reader.readAsDataURL(file);
+          }} />
         <input ref={cameraInputRef} type="file" accept="image/*" capture="environment" className="hidden"
-          onChange={e => { if (e.target.files?.[0]) setPet({ ...pet, photo: 'uploaded.jpg' }); }} />
+          onChange={e => {
+            const file = e.target.files?.[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = () => setPet({ ...pet, photo: reader.result as string });
+            reader.readAsDataURL(file);
+          }} />
         {pet.photo && (
           <div className="flex items-center gap-3 p-3 rounded-xl bg-secondary/50">
-            <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center text-3xl">🐱</div>
+            <img src={pet.photo} alt="Pet" className="w-14 h-14 rounded-xl object-cover" />
             <div>
               <p className="text-sm font-medium text-foreground">Photo uploaded</p>
               <button onClick={() => setPet({ ...pet, photo: null })} className="text-xs text-muted-foreground underline">Change</button>
@@ -484,12 +482,76 @@ function ScreenCostumeShow({
 //  SCREEN 3 — RESULT (AI Generation + Personality)
 // ═══════════════════════════════════════════════════════
 function ScreenResult({
-  pet, generating, progress, onNext,
+  pet, generating, progress,
+  setGenerating, setGenProgress,
+  selectedCostume, generatedImage, setGeneratedImage, genError, setGenError,
+  onNext,
 }: {
   pet: PetData; generating: boolean; progress: number;
+  setGenerating: (v: boolean) => void; setGenProgress: (v: number | ((p: number) => number)) => void;
+  selectedCostume: string | null;
+  generatedImage: string | null; setGeneratedImage: (v: string | null) => void;
+  genError: string | null; setGenError: (v: string | null) => void;
   onNext: () => void;
 }) {
-  const costumeName = COSTUME_TEMPLATES.find(t => t.id === 'royal')?.title || 'Costume';
+  const costumeName = COSTUME_TEMPLATES.find(t => t.id === selectedCostume)?.title
+    || COSTUME_TEMPLATES.find(t => t.id === 'royal')?.title || 'Costume';
+
+  // ─── Call AI generation API ───
+  const hasGenerated = useRef(false);
+  useEffect(() => {
+    if (hasGenerated.current) return;
+    hasGenerated.current = true;
+
+    setGenerating(true);
+    setGenError(null);
+    setGenProgress(0);
+
+    // Indeterminate progress (real API time is unpredictable)
+    const interval = setInterval(() => {
+      setGenProgress(p => Math.min(p + 1, 95)); // cap at 95% until API returns
+    }, 300);
+
+    fetch('/api/generate-costume', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        photo: pet.photo || undefined,
+        costumeId: selectedCostume || 'royal',
+        petName: pet.name,
+        breed: pet.breed,
+      }),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Generation failed');
+        return data;
+      })
+      .then((data) => {
+        clearInterval(interval);
+        setGenProgress(100);
+
+        if (data.imageBase64) {
+          setGeneratedImage(`data:image/png;base64,${data.imageBase64}`);
+        } else if (data.imageUrl) {
+          setGeneratedImage(data.imageUrl);
+        } else if (data.placeholder) {
+          // API not configured — show prompt preview
+          setGenError('API not configured yet. Showing preview mode.');
+          setGeneratedImage(null);
+        }
+
+        setTimeout(() => setGenerating(false), 300);
+      })
+      .catch((err) => {
+        clearInterval(interval);
+        setGenProgress(0);
+        setGenerating(false);
+        setGenError(err.message || 'Something went wrong');
+      });
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="py-6 space-y-6">
@@ -518,13 +580,35 @@ function ScreenResult({
           <Card className="border-0 shadow-lg overflow-hidden">
             <div className="h-2" style={{ backgroundColor: 'var(--petgenio-orange)' }} />
             <CardContent className="p-6 space-y-3">
-              <div className="aspect-square rounded-xl bg-gradient-to-b from-purple-50 to-pink-50 flex items-center justify-center">
-                <div className="text-center">
-                  <span className="text-7xl block mb-2">🐱</span>
-                  <span className="text-4xl">👑</span>
+              {generatedImage ? (
+                <div className="space-y-3">
+                  <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-b from-purple-50 to-pink-50">
+                    <img
+                      src={generatedImage}
+                      alt={`${pet.name}'s ${costumeName} costume`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <p className="font-bold text-foreground text-center text-lg">{pet.name}'s {costumeName}</p>
                 </div>
-              </div>
-              <p className="font-bold text-foreground text-center text-lg">{pet.name}'s {costumeName}</p>
+              ) : genError ? (
+                <div className="text-center py-8 space-y-3">
+                  <span className="text-5xl block">🎨</span>
+                  <p className="text-sm text-muted-foreground">{genError}</p>
+                  <p className="font-bold text-foreground text-lg">{pet.name}'s {costumeName}</p>
+                  <p className="text-xs text-muted-foreground italic">Preview mode — API not yet configured</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <div className="aspect-square rounded-xl bg-gradient-to-b from-purple-50 to-pink-50 flex items-center justify-center">
+                    <div className="text-center">
+                      <span className="text-7xl block mb-2">🐱</span>
+                      <span className="text-4xl">👑</span>
+                    </div>
+                  </div>
+                  <p className="font-bold text-foreground text-center text-lg">{pet.name}'s {costumeName}</p>
+                </div>
+              )}
             </CardContent>
           </Card>
 
