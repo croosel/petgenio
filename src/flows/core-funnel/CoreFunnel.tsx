@@ -388,7 +388,7 @@ function ScreenPetProfile({
 
       {/* ── CTA ── */}
       <Button size="xl" className="w-full text-white text-base h-12 rounded-2xl font-bold"
-        onClick={onNext} disabled={!pet.name}>
+        onClick={onNext} disabled={!pet.photo || !pet.name}>
         Go to Costume Show →
       </Button>
     </div>
@@ -471,7 +471,7 @@ function ScreenCostumeShow({
       {/* ── CTA ── */}
       <div className="space-y-2">
         <Button size="xl" className="w-full text-white text-base h-12 rounded-2xl font-bold"
-          onClick={onNext}>
+          onClick={onNext} disabled={!selectedCostume}>
           Generate My Costume →
         </Button>
         <p className="text-center text-xs text-muted-foreground">Free to try · No account needed</p>
