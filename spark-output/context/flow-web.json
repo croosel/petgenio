@@ -1,0 +1,52 @@
+{
+  "skill": "flow-web",
+  "project": "PetPaw Studio",
+  "scenario": "E-commerce",
+  "component_library": "shadcn/ui",
+  "tech_stack": "Vite + React + TypeScript + Tailwind CSS v4",
+  "build_status": "pass",
+  "flows": [
+    {
+      "name": "Core Funnel",
+      "description": "8-screen conversion funnel: Home → Tools → Upload → Result → Style → Configure → Checkout → Confirmed",
+      "screens": 8,
+      "entry": "Landing page dual-entry (Play/Memorial)",
+      "exit": "Order confirmation with tracking",
+      "file_path": "src/flows/core-funnel/CoreFunnel.tsx",
+      "critical_assumptions": [
+        "Users willing to pay $99 without login on mobile web",
+        "AI generation wait time (5-8s) can be filled by product configurator",
+        "Apple Pay + PayPal covers >80% of NA mobile payments"
+      ]
+    }
+  ],
+  "shared_files": [
+    "src/flows/shared/types.ts",
+    "src/flows/shared/mock-data.ts"
+  ],
+  "ui_components": [
+    "src/components/ui/button.tsx",
+    "src/components/ui/card.tsx",
+    "src/components/ui/progress.tsx"
+  ],
+  "design_tokens": {
+    "primary": "#ED8C43 (warm orange)",
+    "memorial": "#D4A574 (warm gold)",
+    "background": "#FFF8F0 (cream)",
+    "text": "#2D2D2D (charcoal)",
+    "radius": "12px (rounded-xl)"
+  },
+  "ds_coverage_notes": {
+    "using": "shadcn/ui semantic tokens (bg-primary, text-foreground, etc.)",
+    "custom": "PetPaw brand tokens via CSS custom properties (--petpaw-orange, etc.)",
+    "missing": [],
+    "anti_patterns_checked": true
+  },
+  "project_path": "outputs/petpaw-studio/",
+  "metadata": {
+    "generated_at": "2026-06-21T15:30:00+08:00",
+    "platform": "web",
+    "mobile_first": true,
+    "viewport": "375-428px"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "skill": "prd",
+  "generated_at": "2026-06-20T12:00:00+08:00",
+  "project_name": "PetPaw Studio",
+  "direction": "mobile-web-standalone",
+  "prd_file": "spark-output/prd/petpaw-studio-mobile-web.md",
+  "sections_summary": {
+    "summary": "Mobile-First 獨立站，三級火箭漏斗（Hook → AI Engine → Checkout），3 分鐘內完成 $99+ 衝動消費閉環",
+    "primary_persona": "Emily Chen, 28歲洛杉磯 Marketing Manager, 橘貓 Mochi 主人",
+    "product_goal": "用免費工具乾洗流量 + AI 情緒渲染 + 一鍵支付，實現 CAC < $5 的高毛利情感定制閉環",
+    "success_metrics": [
+      { "metric": "工具互動率", "target": "> 60%", "timeframe": "30天" },
+      { "metric": "AI 生成率", "target": "> 40%", "timeframe": "30天" },
+      { "metric": "預覽到支付轉化率", "target": "> 3%", "timeframe": "60天" },
+      { "metric": "平均客單價", "target": "> $99", "timeframe": "90天" },
+      { "metric": "LCP", "target": "< 2.0s", "timeframe": "上線即達標" }
+    ],
+    "feature_count": 7,
+    "in_scope_features": ["首頁工具入口", "年齡計算器", "趣味證件生成器", "AI 造型引擎", "一鍵結帳", "性格測試", "Email 收集 EDM"],
+    "out_of_scope_features": ["社區/養寵打卡", "通用寵物用品電商", "APP", "多寵物檔案", "忠誠度計劃"],
+    "critical_assumption": "北美寵物主願意在無需登入的網頁上完成從免費工具到 $99+ 實物定制的完整鏈路，Apple Pay 一鍵支付能支撐 3%+ 轉化率",
+    "mvp_stories": ["Story 1: 首頁與工具入口", "Story 2: 年齡計算器", "Story 3: 趣味證件生成器", "Story 4: AI 造型引擎", "Story 5: 一鍵結帳"]
+  },
+  "source_skills": {
+    "brief": false,
+    "stories": false,
+    "sitemap": false,
+    "flow_web": false,
+    "flow_mobile": false,
+    "frame": false,
+    "scope": false,
+    "check": false
+  },
+  "thin_sections": []
+}

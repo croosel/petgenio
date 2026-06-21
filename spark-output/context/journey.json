@@ -1,0 +1,141 @@
+{
+  "skill": "journey",
+  "generated_at": "2026-06-21T10:00:00+08:00",
+  "project_name": "PetPaw Studio",
+  "persona": {
+    "name": "Emily Chen",
+    "description": "28 歲 Marketing Manager，洛杉磯，橘貓 Mochi 主人，IG/TikTok 活躍",
+    "jtbd": "當我在 IG/TikTok 看到可愛的 AI 皮克斯風寵物造型時，我想立刻為我的毛孩子生成一個同樣酷的造型並定制成實體毛絨玩具，從而分享到社交媒體獲得讚和評論"
+  },
+  "journey_type": "end-to-end",
+  "dual_mode": {
+    "playful": { "emoji": "🎉", "color": "#ED8C43", "tone": "幽默擬人化", "scenario": "衝動消費 / 社交分享" },
+    "memorial": { "emoji": "🕊️", "color": "#D4A574", "tone": "溫暖詩意", "scenario": "緬懷紀念 / 溢價 +30%" }
+  },
+  "stages": [
+    {
+      "name": "Awareness",
+      "name_zh": "發現",
+      "emoji": "👀",
+      "order": 1,
+      "user_goal": "判斷這個東西值不值得看",
+      "touchpoints": ["Instagram Reels", "TikTok 短影片", "朋友分享連結", "Google 搜索"],
+      "actions": ["刷 IG/TikTok 看到寵物擬人化影片", "看到朋友分享的 AI 皮克斯風寵物圖", "搜索 custom pet plush 發現網站"],
+      "thoughts": ["這什麼？也太可愛了吧", "Mochi 穿恐龍裝一定超好笑"],
+      "emotion": "😊",
+      "pain_level": 2,
+      "quotes": [],
+      "pain_points": ["社媒內容淹沒，注意力 < 3 秒", "不確定是否為廣告或真實內容"],
+      "opportunities": ["動態首頁 Hook：根據 UTM/Referer 展示對應寵物品種的 AI 造型", "3 秒價值主張動畫：Your pet → Pixar style → Real plush in 5 days"]
+    },
+    {
+      "name": "Consideration",
+      "name_zh": "評估",
+      "emoji": "🤔",
+      "order": 2,
+      "user_goal": "快速理解產品價值，決定是否花時間玩",
+      "touchpoints": ["首頁 Hero Section", "雙入口選擇器（Play/Memorial）", "動態 Hook 文案"],
+      "actions": ["點擊連結進入 PetPaw 首頁", "看到雙入口（Play 🎉 / Memorial 🕊️）", "瀏覽 3 秒判斷是否值得繼續"],
+      "thoughts": ["看起來不錯，但不会是騙人的吧？", "有西班牙語嗎？英文有點快"],
+      "emotion": "🙂",
+      "pain_level": 2,
+      "quotes": [],
+      "pain_points": ["西班牙語用戶看到英文首頁產生不信任", "3 秒內無法理解產品價值"],
+      "opportunities": ["語言偵測自動切換（EN/ES/ZH），文化重寫非翻譯", "雙入口視覺分裂：Play 暖橙 / Memorial 暖金，3 秒內建立情感共鳴"]
+    },
+    {
+      "name": "Onboarding",
+      "name_zh": "上手",
+      "emoji": "🎯",
+      "order": 3,
+      "user_goal": "用免費工具給自己的寵物做個趣味互動",
+      "touchpoints": ["免費工具頁面", "照片上傳元件", "結果頁 + Email 彈窗"],
+      "actions": ["選擇入口模式（Play 或 Memorial）", "上傳寵物照片", "使用年齡計算器 / 趣味證件", "留下 Email 解鎖 HD 下載"],
+      "thoughts": ["上傳照片就好了？好簡單", "不用註冊？太好了"],
+      "emotion": "😊",
+      "pain_level": 1,
+      "quotes": [],
+      "pain_points": ["照片品質不佳影響後續 AI 生成效果", "工具結果想保存但需留 Email，有隱私顧慮"],
+      "opportunities": ["照片品質即時反饋：Good lighting! Try a closer shot", "Email 收集包裝為解鎖 HD 下載而非註冊"]
+    },
+    {
+      "name": "Activation",
+      "name_zh": "激活",
+      "emoji": "⚡",
+      "order": 4,
+      "user_goal": "看到 AI 生成的造型預覽，決定是否定制實物",
+      "touchpoints": ["AI 造型引擎頁", "產品配置器（等待中）", "預覽 Reveal 動效", "結帳頁（Apple Pay/PayPal）"],
+      "actions": ["點擊 AI 造型選擇風格", "等待生成期間配置產品（硬度/尺寸/香味/盒色）", "看到 AI 預覽結果", "點擊定制實物 → Apple Pay 一鍵支付"],
+      "thoughts": ["哇！這真的是 Mochi 嗎！", "$99 有點貴...但有 Apple Pay 很方便", "等生成的時候選香味和盒子顏色，有意思"],
+      "emotion": "😕",
+      "pain_level": 4,
+      "quotes": [],
+      "pain_points": ["AI 預覽與實體成品差距的不確定性", "$99 衝動消費的心理門檻", "Memorial 模式下對商業化緬懷的敏感"],
+      "opportunities": ["產品配置器填充等待時間（被動等 → 主動參與）", "Reveal 動效：scale 0.8→1.0 + fade 製造揭曉儀式感", "Trust Badges + 30-Day Guarantee 常駐結帳區"]
+    },
+    {
+      "name": "Engagement",
+      "name_zh": "交付",
+      "emoji": "🎁",
+      "order": 5,
+      "user_goal": "收到高品質的定制毛絨玩具",
+      "touchpoints": ["訂單確認 Email", "生產進度通知", "實體包裹 + 開箱體驗"],
+      "actions": ["收到訂單確認 + 生產進度通知", "5-7 天後收到包裹", "開箱 → 看到實體 vs 預覽對比", "拍照 / 錄影準備分享"],
+      "thoughts": ["天啊跟預覽一模一樣！", "質感比 Cuddle Clones 好，而且只等了 5 天"],
+      "emotion": "😊",
+      "pain_level": 1,
+      "quotes": [],
+      "pain_points": ["交期 5-7 天的等待焦慮", "實體與預覽色差風險"],
+      "opportunities": ["開箱體驗設計：品牌卡片 + 手寫風感謝 + 拍照引導框", "生產進度 Email 附帶幕後花絮增加期待感"]
+    },
+    {
+      "name": "Retention",
+      "name_zh": "留存",
+      "emoji": "🔄",
+      "order": 6,
+      "user_goal": "收到新造型推薦，考慮再次定制",
+      "touchpoints": ["EDM 郵件", "新風格預覽頁", "結帳頁（回訪）"],
+      "actions": ["收到 EDM：新造型推薦", "點擊查看新風格預覽", "考慮是否再次下單"],
+      "thoughts": ["恐龍裝造型！Mochi 一定要試", "但上次 $99 了...有沒有便宜點的？"],
+      "emotion": "😕",
+      "pain_level": 3,
+      "quotes": [],
+      "pain_points": ["$99 重複消費門檻高（缺 $59 Mini 選項）", "EDM 頻率過高導致退訂"],
+      "opportunities": ["V2 推出 $59 Mini 版（Maria 的包容性定價）降低回購門檻", "EDM 個人化：根據上次購買風格推薦互補造型"]
+    },
+    {
+      "name": "Advocacy",
+      "name_zh": "推薦",
+      "emoji": "📣",
+      "order": 7,
+      "user_goal": "分享成品到社交媒體，獲得讚和認同",
+      "touchpoints": ["IG Story / TikTok", "品牌 QR Code（證件上）", "朋友口耳相傳"],
+      "actions": ["拍照發 IG Story / TikTok", "標記 @PetPawStudio", "朋友問哪裡做的 → 裂變"],
+      "thoughts": ["朋友都在問哪裡做的！", "QR Code 掃一下就能做自己的，太聰明了"],
+      "emotion": "😊",
+      "pain_level": 1,
+      "quotes": [],
+      "pain_points": ["分享後得不到即時互動反饋", "品牌裂變鏈路斷裂（QR Code 不夠顯眼）"],
+      "opportunities": ["證件/包裝內建品牌 QR Code → 朋友掃碼直達工具（零摩擦裂變）", "分享模板：一鍵生成 IG Story 尺寸的對比圖（AI 預覽 vs 實體）"]
+    }
+  ],
+  "emotion_curve": [
+    { "stage_order": 1, "pain_level": 2 },
+    { "stage_order": 2, "pain_level": 2 },
+    { "stage_order": 3, "pain_level": 1 },
+    { "stage_order": 4, "pain_level": 4 },
+    { "stage_order": 5, "pain_level": 1 },
+    { "stage_order": 6, "pain_level": 3 },
+    { "stage_order": 7, "pain_level": 1 }
+  ],
+  "key_moments": [
+    { "stage_order": 4, "type": "moment-of-truth", "description": "AI 預覽 Reveal 是決定用戶去留的 0.5 秒，預覽品質直接決定 $99 轉化" },
+    { "stage_order": 4, "type": "dropout-risk", "description": "$99 價格門檻 + 預覽 vs 實體不確定性，Memorial 模式對商業化緬懷的敏感" },
+    { "stage_order": 6, "type": "dropout-risk", "description": "$99 回購門檻高 + EDM 疲勞，需 V2 $59 Mini 降低門檻" },
+    { "stage_order": 3, "type": "delight", "description": "免費工具零摩擦的 Aha moment，無需登入即可使用" },
+    { "stage_order": 5, "type": "delight", "description": "開箱所見即所得的驚喜，品牌忠誠度關鍵鑄造點" },
+    { "stage_order": 7, "type": "delight", "description": "社交反饋正循環，QR Code 零摩擦裂變" },
+    { "stage_order": 5, "type": "recovery", "description": "從 Stage 4 焦慮（pain=4）急轉到開箱驚喜（pain=1），落差越大滿意度越高" }
+  ],
+  "journey_file": "spark-output/journey/petpaw-studio-journey.html"
+}

@@ -1,0 +1,111 @@
+{
+  "skill": "extract",
+  "generated_at": "2026-06-20T14:30:00+08:00",
+  "source": {
+    "type": "internal",
+    "uri": "spark-output/prd/petpaw-studio-mobile-web.md",
+    "slug": "petpaw-studio",
+    "description": "PetPaw Studio PRD (Mobile-First Web, trilingual EN/ES/ZH)"
+  },
+  "meta": {
+    "source_type": "prd-document",
+    "extraction_method": "manual-prd-parse",
+    "fallback_applied": ["no-config-source", "no-sparkdesign-baseline"],
+    "fallback_reason": "Input is a PRD markdown document, not a code repository. Design tokens extracted directly from PRD design constraint sections.",
+    "ask_answers": {
+      "deliverable_choice": "B",
+      "confirmed_at": "2026-06-20T14:30:00+08:00"
+    },
+    "internal_scan": {
+      "css_in_js_engine": "none",
+      "css_in_js_files_parsed": 0,
+      "config_sources_found": []
+    },
+    "figma_scan": null,
+    "token_count": {
+      "color": 13,
+      "typography": 9,
+      "spacing": 8,
+      "radius": 5,
+      "shadow": 4,
+      "motion": 6,
+      "breakpoint": 4,
+      "z_index": 6,
+      "icon_set": 5,
+      "gradient": 3,
+      "state": 4
+    }
+  },
+  "tokens": {
+    "color": [
+      { "name": "primary", "value": "#ED8C43", "role": "brand", "applied_to": ["cta-button", "brand-identity", "focus-ring"] },
+      { "name": "primary-light", "value": "#F5A663", "role": "brand-secondary", "applied_to": ["gradients", "hover-states"] },
+      { "name": "background", "value": "#FFF8F0", "role": "surface-base", "applied_to": ["page-background"] },
+      { "name": "surface", "value": "#FFFFFF", "role": "surface-elevated", "applied_to": ["cards", "modals", "header"] },
+      { "name": "text-primary", "value": "#1A1A1A", "role": "text-heading", "applied_to": ["headings", "primary-body"] },
+      { "name": "text-secondary", "value": "#666666", "role": "text-body", "applied_to": ["descriptions", "secondary-text"] },
+      { "name": "text-tertiary", "value": "#999999", "role": "text-muted", "applied_to": ["placeholders", "hints", "disabled"] },
+      { "name": "success", "value": "#10B981", "role": "semantic-positive", "applied_to": ["success-states", "guarantee-badges"] },
+      { "name": "error", "value": "#EF4444", "role": "semantic-negative", "applied_to": ["error-states", "validation"] },
+      { "name": "warning", "value": "#F59E0B", "role": "semantic-caution", "applied_to": ["warning-states"] },
+      { "name": "info", "value": "#3B82F6", "role": "semantic-informative", "applied_to": ["info-badges", "links"] },
+      { "name": "border", "value": "#E5E7EB", "role": "surface-border", "applied_to": ["card-borders", "dividers"] },
+      { "name": "border-strong", "value": "#D1D5DB", "role": "surface-border-strong", "applied_to": ["focused-inputs"] }
+    ],
+    "typography": {
+      "families": ["Inter", "Noto Sans SC", "system-ui"],
+      "weights": [400, 500, 600, 700],
+      "scale": [
+        { "token": "display-lg", "size": "28px", "lineHeight": "36px", "weight": 700 },
+        { "token": "display-md", "size": "24px", "lineHeight": "32px", "weight": 700 },
+        { "token": "heading-lg", "size": "20px", "lineHeight": "28px", "weight": 600 },
+        { "token": "heading-md", "size": "18px", "lineHeight": "26px", "weight": 600 },
+        { "token": "body-lg", "size": "16px", "lineHeight": "24px", "weight": 400 },
+        { "token": "body-md", "size": "14px", "lineHeight": "22px", "weight": 400 },
+        { "token": "body-sm", "size": "12px", "lineHeight": "18px", "weight": 400 },
+        { "token": "button", "size": "16px", "lineHeight": "24px", "weight": 600 },
+        { "token": "badge", "size": "11px", "lineHeight": "16px", "weight": 500 }
+      ]
+    },
+    "spacing": { "anchor": "4px", "values": ["4px", "8px", "12px", "16px", "20px", "24px", "32px", "48px"] },
+    "radius": [
+      { "token": "sm", "value": "8px", "applied_to": ["dropdowns"] },
+      { "token": "md", "value": "12px", "applied_to": ["inputs"] },
+      { "token": "lg", "value": "16px", "applied_to": ["images"] },
+      { "token": "xl", "value": "20px", "applied_to": ["cards"] },
+      { "token": "full", "value": "999px", "applied_to": ["buttons", "badges"] }
+    ],
+    "shadow": [
+      { "token": "sm", "value": "0 1px 3px rgba(0,0,0,0.08)", "elevation": 1 },
+      { "token": "md", "value": "0 4px 12px rgba(0,0,0,0.10)", "elevation": 2 },
+      { "token": "lg", "value": "0 8px 24px rgba(0,0,0,0.12)", "elevation": 3 },
+      { "token": "focus-ring", "value": "0 0 0 3px rgba(237,140,67,0.25)" }
+    ],
+    "motion": [
+      { "token": "quick", "duration": "150ms", "easing": "ease-out" },
+      { "token": "standard", "duration": "300ms", "easing": "ease-in-out" },
+      { "token": "slow", "duration": "500ms", "easing": "ease-in-out" },
+      { "token": "ai-loading", "duration": "5000-8000ms", "easing": "linear" },
+      { "token": "number-flip", "duration": "500ms", "easing": "cubic-bezier(0.4,0,0.2,1)" },
+      { "token": "result-reveal", "duration": "600ms", "easing": "cubic-bezier(0.34,1.56,0.64,1)" }
+    ],
+    "breakpoint": { "mobile-sm": "375px", "mobile-md": "390px", "mobile-lg": "428px", "desktop": "480px+" },
+    "z_index": { "base": 0, "sticky": 10, "dropdown": 20, "bottom-sheet": 30, "modal": 40, "overlay": 50 },
+    "icon_set": { "library": "lucide-react", "default_size": "20px", "stroke_width": "1.5px" },
+    "gradient": [
+      { "token": "hero-bg", "value": "linear-gradient(135deg, rgba(237,140,67,0.08), rgba(245,166,99,0.04))" },
+      { "token": "cta-button", "value": "linear-gradient(135deg, #ED8C43, #F5A663)" },
+      { "token": "loading-shimmer", "value": "linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0)" }
+    ],
+    "state": { "hover": "shadow+translateY(-2px)", "active": "scale(0.98)", "disabled": "opacity(0.5)", "focus": "focus-ring" }
+  },
+  "sparkdesign_diff": null,
+  "handoff_hint": "# 设计上下文\n\n本项目的设计语言已由 /extract 抽取，参考：\n- 完整 design.md：spark-output/extract/petpaw-studio/petpaw-studio-design-language.md\n- Token JSON：spark-output/extract/petpaw-studio/petpaw-studio-design-tokens.json\n- Tailwind 配置：spark-output/extract/petpaw-studio/petpaw-studio-tailwind.config.js\n- shadcn 主题：spark-output/extract/petpaw-studio/petpaw-studio-shadcn-theme.css\n- 视觉预览：spark-output/extract/petpaw-studio/petpaw-studio-preview.html\n\n生成 UI 组件时，所有 color / spacing / radius / shadow 必须从上述 token 中选取，不得自创。\n\n## 关键约束\n- Mobile-First：375px-428px 为第一设计基准，Desktop 居中单栏 max-width 480px\n- 三语支持：EN / ES / ZH，按钮用 min-width 不用 fixed-width（西班牙语文字长 20-30%）\n- 字體：英文 Inter + 中文 Noto Sans SC\n- 圓角：卡片 20px、按鈕 999px（膠囊）、輸入框 12px\n- 配色：主色 #ED8C43（暖橙）、背景 #FFF8F0（暖白）\n- 性能：LCP < 2.0s，總資源 < 500KB",
+  "artifacts": {
+    "design_md": "spark-output/extract/petpaw-studio/petpaw-studio-design-language.md",
+    "tokens_json": "spark-output/extract/petpaw-studio/petpaw-studio-design-tokens.json",
+    "tailwind_config": "spark-output/extract/petpaw-studio/petpaw-studio-tailwind.config.js",
+    "shadcn_theme": "spark-output/extract/petpaw-studio/petpaw-studio-shadcn-theme.css",
+    "preview_html": "spark-output/extract/petpaw-studio/petpaw-studio-preview.html"
+  }
+}

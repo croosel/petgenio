@@ -1,0 +1,83 @@
+{
+  "skill": "brief",
+  "generated_at": "2026-06-20T16:00:00+08:00",
+  "project_name": "PetPaw Studio",
+  "project_type": "product-design",
+  "project_subtype": "new-product",
+  "business_context": "北美寵物擬人化消費爆發，AI 繪圖成本降至可忽略，柔性供應鏈已支持 5-7 天交期。雙入口漏斗（Play 🎉 / Memorial 🕊️）→ 免費互動工具乾洗流量 → AI 情緒渲染 → 等待時間產品配置器 → 一鍵實物定制，3 分鐘內完成 $99+ 衝動消費閉環。MVP $99 / V2 $59 Mini 包容性定價。",
+  "business_goal": [
+    "工具互動率 > 60%",
+    "AI 生成率 > 40%",
+    "預覽到支付轉化 > 3%",
+    "CAC < $5 · AOV > $99"
+  ],
+  "user": [
+    "25-45 歲北美寵物主",
+    "IG / TikTok 活躍用戶",
+    "願為情緒價值付 500%+ 溢價",
+    "無需登入，網頁完成支付"
+  ],
+  "strategy_dimensions": [
+    {
+      "name": "互動設計",
+      "thesis": "雙入口漏斗 + 動態首頁 + 零購物車",
+      "tactics": ["Play 🎉 / Memorial 🕊️ 入口 → 不同視覺/文案/CTA", "動態首頁 Hook：根據來源展示對應工具", "Apple Pay / PayPal 一鍵支付，Face ID 授權"],
+      "rationale": "對應轉化率 > 3%、CAC < $5"
+    },
+    {
+      "name": "情感化設計",
+      "thesis": "雙模式情感系統 + 有意義的等待",
+      "tactics": ["Playful（暖橙 #ED8C43）/ Memorial（暖金 #D4A574）", "等待時間做產品配置器（硬度/尺寸/香味/盒色）", "結果 reveal 動效 + 異常態溫和提示"],
+      "rationale": "對應 AI 生成率 > 40%、Memorial 溢價 +30%"
+    },
+    {
+      "name": "視覺設計",
+      "thesis": "暖橙品牌 + 皮克斯美學建立信任",
+      "tactics": ["#ED8C43 主色貫穿全漏斗", "大圓角 20px 卡片 + 膠囊按鈕", "Trust Badges 常駐結帳區"],
+      "rationale": "對應 AOV > $99、30-Day Guarantee"
+    },
+    {
+      "name": "內容設計",
+      "thesis": "四語獨立文案系統 + AI 輔助共創",
+      "tactics": ["EN / ES / ZH / Spanglish 文化重寫非翻譯", "AI 文案生成器 + 用戶共創人格化標籤", "證件自帶品牌 QR Code 裂變 + Email 收集"],
+      "rationale": "對應非英語用戶 > 30%、Email > 25%"
+    },
+    {
+      "name": "多端適配",
+      "thesis": "Mobile-First 375-428px，三語彈性佈局",
+      "tactics": ["Desktop 居中單欄 max-width 480px", "min-width 替代 fixed-width（ES +30%）", "WebP 全圖 + LCP < 2.0s 性能預算"],
+      "rationale": "對應非英語用戶佔比 > 40%"
+    }
+  ],
+  "design_criteria": [
+    { "kind": "quant", "text": "免費工具 → $99 支付鏈路 ≤ 7 步" },
+    { "kind": "quant", "text": "預覽到支付轉化率 > 3%" },
+    { "kind": "quant", "text": "首屏 LCP < 2.0s" },
+    { "kind": "qual", "text": "「像在玩耍不是在購物」的整體感受" },
+    { "kind": "qual", "text": "三語排版均無文字溢出或截斷" }
+  ],
+  "constraints": [
+    "4 週核心漏斗 MVP",
+    "Next.js + Tailwind + TypeScript",
+    "總資源 < 500KB（WebP 全圖）",
+    "無需登入系統（MVP）",
+    "Stripe + Apple Pay / Google Pay / PayPal"
+  ],
+  "out_of_scope": [
+    "不做社區 / 養寵打卡（離錢太遠）",
+    "不做通用寵物用品電商",
+    "不做原生 APP（北美下載摩擦大）",
+    "不做多商品購物車（MVP 單品直購）",
+    "不做折扣碼 / 會員積分系統",
+    "寵物日記（未來可議，目前吃力不討好）"
+  ],
+  "source_skills": {
+    "prd": true,
+    "extract": true
+  },
+  "artifacts": {
+    "html": "spark-output/brief/petpaw-studio-brief.html",
+    "css": "spark-output/brief/brief-themes.css"
+  },
+  "critical_assumption": "北美寵物主願意在無需登入的網頁上完成從免費工具到 $99+ 實物定制的完整鏈路；雙入口漏斗（Play/Memorial）能覆蓋更廣情感場景；Apple Pay / PayPal 一鍵支付能支撐 3%+ 轉化率；V2 $59 Mini 版能觸達價格敏感用戶（Maria 的包容性定價）"
+}

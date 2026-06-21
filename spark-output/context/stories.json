@@ -1,0 +1,198 @@
+{
+  "skill": "stories",
+  "generated_at": "2026-06-21T11:00:00+08:00",
+  "project_name": "PetPaw Studio",
+  "direction": "Mobile-First 獨立站全漏斗（雙入口 + 免費工具 + AI 引擎 + 結帳 + 留存）",
+  "persona": {
+    "name": "Emily Chen",
+    "description": "28 歲 Marketing Manager，洛杉磯，橘貓 Mochi 主人，IG/TikTok 活躍",
+    "jtbd": "當我在 IG/TikTok 看到可愛的 AI 寵物造型時，我想立刻為我的毛孩子生成造型並定制成實體毛絨玩具，從而分享到社交媒體或作為紀念"
+  },
+  "stories": [
+    {
+      "id": "story-1",
+      "title": "Emily 打開 PetPaw，3 秒內知道這裡能幫 Mochi 做一個酷造型",
+      "size": "story",
+      "persona": "Emily Chen",
+      "scenario": "從 IG/TikTok 點擊連結進入 PetPaw 首頁",
+      "acceptance_criteria": [
+        "Emily 打開首頁後 3 秒內能看到兩個清晰的情感入口（Play / Memorial）",
+        "選擇入口後頁面視覺/文案/CTA 即時切換到對應模式",
+        "首頁動態 Hook 能根據來源展示對應寵物品種的 AI 造型",
+        "Emily 不需要滾動就能看到核心價值主張和行動按鈕"
+      ],
+      "design_touchpoints": [
+        "screen:首頁 Hero",
+        "screen:雙入口選擇器",
+        "screen:動態 Hook 區",
+        "component:入口卡片（Play/Memorial）",
+        "component:品種輪播",
+        "component:價值主張動畫",
+        "state:初始載入 / 入口懸停 / 模式切換",
+        "pattern:entry-selection / dynamic-content"
+      ],
+      "related_strategy_dimension": "互動設計",
+      "risk": "動態 Hook 技術複雜度高，MVP 先做靜態版本 A/B test",
+      "priority": "p0",
+      "critical_assumption": true
+    },
+    {
+      "id": "story-2",
+      "title": "Emily 上傳 Mochi 的照片，不用註冊就拿到一張趣味寵物證件",
+      "size": "story",
+      "persona": "Emily Chen",
+      "scenario": "選擇 Play 入口後使用免費工具（年齡計算器 / 趣味證件）",
+      "acceptance_criteria": [
+        "Emily 上傳照片後 3 秒內看到趣味結果",
+        "結果頁包含可分享的人格化標籤",
+        "不需要註冊或登入就能使用完整工具",
+        "輸入 Email 後能下載 HD 版本",
+        "結果頁有明顯的 AI 造型入口引導到下一階段"
+      ],
+      "design_touchpoints": [
+        "screen:工具選擇頁",
+        "screen:照片上傳頁",
+        "screen:結果展示頁",
+        "screen:Email 彈窗",
+        "component:工具卡片 / 照片上傳區 / 結果卡片 / Email 輸入",
+        "state:空狀態 / 分析中 / 成功結果 / Email 已提交",
+        "pattern:onboarding / tool-flow / email-gate"
+      ],
+      "related_strategy_dimension": "互動設計 + 內容設計",
+      "risk": "人格化標籤文案品質是成敗關鍵，MVP 用模板庫 V2 接 AI",
+      "priority": "p0",
+      "critical_assumption": false
+    },
+    {
+      "id": "story-3",
+      "title": "Emily 看到 Mochi 的 AI 皮克斯風預覽，忍不住配置產品細節",
+      "size": "story",
+      "persona": "Emily Chen",
+      "scenario": "工具結果頁點擊 AI 造型 → 選擇風格 → 等待生成 → 配置產品",
+      "acceptance_criteria": [
+        "選擇風格後能看到生成進度（文字切換動畫）",
+        "等待期間配置器自動展開（硬度/尺寸/香味/盒色）",
+        "配置器選項根據 Memorial/Play 模式有不同預設",
+        "預覽結果以 Reveal 動效呈現（scale + fade）",
+        "能看到預覽結果和 Customize This — $99 的 CTA"
+      ],
+      "design_touchpoints": [
+        "screen:AI 造型引擎頁",
+        "screen:風格選擇器",
+        "screen:等待+配置器頁",
+        "screen:預覽 Reveal 頁",
+        "component:風格卡片 / 進度動畫 / 配置器 / Reveal 容器",
+        "state:風格選擇 / 生成中 / 預覽揭曉 / 異常態",
+        "pattern:ai-generation / product-configurator / reveal-animation"
+      ],
+      "related_strategy_dimension": "情感化設計",
+      "risk": "AI 生成品質不穩定，需品質把關機制（自動評分+Regenerate）",
+      "priority": "p0",
+      "critical_assumption": true
+    },
+    {
+      "id": "story-4",
+      "title": "Emily 用 Apple Pay 一指搞定，3 分鐘從玩到買",
+      "size": "story",
+      "persona": "Emily Chen",
+      "scenario": "看到 AI 預覽後決定定制 → 結帳 → Apple Pay 一鍵支付",
+      "acceptance_criteria": [
+        "從預覽頁到支付完成 ≤ 3 步",
+        "結帳頁顯示預覽圖 + 配置摘要 + Trust Badges",
+        "Apple Pay / PayPal / Google Pay 至少一種一鍵支付可用",
+        "支付成功後顯示訂單確認 + 預計交期 + 進度追蹤入口",
+        "不需要註冊或登入即可完成購買"
+      ],
+      "design_touchpoints": [
+        "screen:預覽 Reveal 頁（含 CTA）",
+        "screen:結帳頁",
+        "screen:訂單確認頁",
+        "component:預覽圖+配置摘要卡片 / Trust Badges / 支付按鈕組",
+        "state:結帳初始 / 支付處理中 / 成功 / 失敗",
+        "pattern:checkout / one-tap-payment / order-confirmation"
+      ],
+      "related_strategy_dimension": "互動設計",
+      "risk": "$99 衝動消費需要 Trust Badges 支撐，支付失敗異常態處理要溫和",
+      "priority": "p0",
+      "critical_assumption": true
+    },
+    {
+      "id": "story-5",
+      "title": "Maria 用西班牙語瀏覽全站，覺得這個品牌懂她的文化",
+      "size": "story",
+      "persona": "Maria Gonzalez",
+      "scenario": "TikTok 廣告進入 PetPaw，瀏覽器語言偏好為 es-US",
+      "acceptance_criteria": [
+        "瀏覽器語言偏好被自動偵測，頁面即時切換到對應語言",
+        "所有文案是文化重寫而非直譯",
+        "語言切換器在首頁頂部可見，一鍵切換全站即時生效",
+        "西班牙語版本文字佈局不溢出或截斷（+30% 彈性）",
+        "結帳頁 Trust Badges 和支付說明有母語版本"
+      ],
+      "design_touchpoints": [
+        "screen:全站所有屏",
+        "component:語言切換器 / 文化適配文案系統 / 彈性文字容器",
+        "state:自動偵測 / 手動切換 / 混合語言（Spanglish）",
+        "pattern:i18n / locale-detection / cultural-adaptation"
+      ],
+      "related_strategy_dimension": "內容設計 + 多端適配",
+      "risk": "文化重寫成本高，MVP 先高品質翻譯+關鍵文案人工潤飾",
+      "priority": "p1",
+      "critical_assumption": false
+    },
+    {
+      "id": "story-6",
+      "title": "Emily 收到包裹，開箱那一刻比預覽還驚喜",
+      "size": "story",
+      "persona": "Emily Chen",
+      "scenario": "5-7 天後收到定制毛絨玩具包裹",
+      "acceptance_criteria": [
+        "包裹外觀有品牌識別（暖橙色盒子 / 品牌 logo）",
+        "開箱第一層看到手寫風卡片（Play 幽默 / Memorial 詩意）",
+        "玩具包裝包含選擇的香味或紀念卡片",
+        "盒內有拍照引導框或對比圖模板",
+        "盒子底部/卡片上有品牌 QR Code 直達工具頁"
+      ],
+      "design_touchpoints": [
+        "screen:訂單確認 Email / 生產進度 Email / 實體包裹",
+        "component:品牌卡片 / 薄紙包裝 / 香包 / QR Code / 拍照引導框",
+        "state:等待期 / 開箱瞬間 / 分享引導",
+        "pattern:unboxing-experience / viral-loop"
+      ],
+      "related_strategy_dimension": "情感化設計 + 視覺設計",
+      "risk": "實體包裝成本——MVP 先做品牌卡片+QR Code 貼紙 <$0.5/單",
+      "priority": "p1",
+      "critical_assumption": false
+    },
+    {
+      "id": "story-7",
+      "title": "Emily 收到一封郵件，裡面是 Mochi 的恐龍裝新造型",
+      "size": "story",
+      "persona": "Emily Chen",
+      "scenario": "購買後 2 週收到個人化 EDM 推薦新風格",
+      "acceptance_criteria": [
+        "購買後 2 週內收到 EDM，包含用寵物照片生成的新風格預覽",
+        "EDM 文案個人化（寵物名字 + 新造型描述）",
+        "EDM 包含 $59 Mini 版定價（V2）或 $99 Standard",
+        "CTA 按鈕直達結帳頁（deep link）",
+        "郵件底部一鍵退訂"
+      ],
+      "design_touchpoints": [
+        "screen:EDM 郵件模板",
+        "screen:Deep Link 結帳頁",
+        "component:個人化預覽圖 / CTA 按鈕 / 退訂連結",
+        "state:郵件送達 / 打開 / 點擊 CTA / 退訂",
+        "pattern:email-marketing / retargeting / re-purchase"
+      ],
+      "related_strategy_dimension": "內容設計",
+      "risk": "依賴 V2 的 $59 Mini 版和 AI 重新生成能力，MVP 只能做通用 EDM",
+      "priority": "p2",
+      "critical_assumption": false
+    }
+  ],
+  "story_count": 7,
+  "priority_breakdown": { "p0": 4, "p1": 2, "p2": 1 },
+  "critical_assumptions_count": 3,
+  "journey_stage_coverage": [1, 2, 3, 4, 5, 6, 7],
+  "story_file": "spark-output/stories/petpaw-studio-mobile-web.md"
+}

@@ -1,0 +1,210 @@
+{
+  "skill": "sitemap",
+  "generated_at": "2026-06-21T12:00:00+08:00",
+  "project_name": "PetPaw Studio",
+  "platform": "web",
+  "primary_navigation": [
+    {
+      "id": "home",
+      "label": "PetPaw",
+      "route": "/",
+      "icon_hint": "paw-print",
+      "description": "Logo → 回首頁（重新選擇入口）",
+      "children": []
+    },
+    {
+      "id": "track",
+      "label": "Track",
+      "route": "/track",
+      "icon_hint": "package",
+      "description": "訂單追蹤（post-purchase only）",
+      "children": []
+    },
+    {
+      "id": "language",
+      "label": "🌐 EN/ES/ZH",
+      "route": null,
+      "icon_hint": "globe",
+      "description": "語言切換器（全站即時生效）",
+      "children": []
+    }
+  ],
+  "pages": [
+    {
+      "id": "page-home",
+      "route": "/",
+      "label": "首頁",
+      "purpose": "雙入口選擇 + 動態 Hook，3 秒建立情感歸屬",
+      "parent": null,
+      "access": "public",
+      "related_features": ["雙入口漏斗", "動態首頁 Hook"],
+      "related_stories": ["story-1"]
+    },
+    {
+      "id": "page-tools",
+      "route": "/tools",
+      "label": "工具選擇",
+      "purpose": "免費工具入口（年齡計算器 / 趣味證件）",
+      "parent": "home",
+      "access": "public",
+      "related_features": ["免費互動工具"],
+      "related_stories": ["story-2"]
+    },
+    {
+      "id": "page-tool-upload",
+      "route": "/tools/upload",
+      "label": "上傳照片",
+      "purpose": "寵物照片上傳 + 品質即時反饋",
+      "parent": "home",
+      "access": "public",
+      "related_features": ["免費互動工具"],
+      "related_stories": ["story-2"]
+    },
+    {
+      "id": "page-tool-result",
+      "route": "/tools/result",
+      "label": "趣味結果",
+      "purpose": "人格化標籤結果 + Email 收集 + AI 造型 CTA",
+      "parent": "home",
+      "access": "public",
+      "related_features": ["免費互動工具", "Email 收集"],
+      "related_stories": ["story-2"]
+    },
+    {
+      "id": "page-ai-style",
+      "route": "/style",
+      "label": "AI 造型",
+      "purpose": "風格選擇（Pixar 3D / Blind Box / Royal）",
+      "parent": "home",
+      "access": "public",
+      "related_features": ["AI 造型引擎"],
+      "related_stories": ["story-3"]
+    },
+    {
+      "id": "page-preview-configure",
+      "route": "/preview",
+      "label": "預覽 + 配置",
+      "purpose": "AI 預覽 Reveal + 產品配置器（等待時填充）",
+      "parent": "home",
+      "access": "public",
+      "related_features": ["AI 造型引擎", "產品配置器"],
+      "related_stories": ["story-3", "story-4"]
+    },
+    {
+      "id": "page-checkout",
+      "route": "/checkout",
+      "label": "結帳",
+      "purpose": "一鍵支付（Apple Pay / PayPal / Google Pay）",
+      "parent": "home",
+      "access": "public",
+      "related_features": ["一鍵支付"],
+      "related_stories": ["story-4"]
+    },
+    {
+      "id": "page-order-confirmed",
+      "route": "/confirmed",
+      "label": "訂單確認",
+      "purpose": "支付成功 + 交期 + 進度追蹤入口",
+      "parent": "home",
+      "access": "public",
+      "related_features": ["訂單管理"],
+      "related_stories": ["story-4"]
+    },
+    {
+      "id": "page-order-track",
+      "route": "/track",
+      "label": "訂單追蹤",
+      "purpose": "輸入 Email/訂單號查看生產+物流進度",
+      "parent": null,
+      "access": "public",
+      "related_features": ["訂單管理"],
+      "related_stories": ["story-6"]
+    },
+    {
+      "id": "page-mini-landing",
+      "route": "/mini",
+      "label": "Mini 版",
+      "purpose": "V2 $59 Mini 落地頁（EDM deep link 目標）",
+      "parent": null,
+      "access": "public",
+      "related_features": ["包容性定價"],
+      "related_stories": ["story-7"]
+    },
+    {
+      "id": "page-mini-checkout",
+      "route": "/mini/checkout",
+      "label": "Mini 結帳",
+      "purpose": "$59 Mini 版結帳",
+      "parent": null,
+      "access": "public",
+      "related_features": ["包容性定價", "一鍵支付"],
+      "related_stories": ["story-7"]
+    },
+    {
+      "id": "page-404",
+      "route": "/404",
+      "label": "404",
+      "purpose": "溫和提示 + 回首頁 CTA",
+      "parent": null,
+      "access": "public",
+      "related_features": [],
+      "related_stories": []
+    }
+  ],
+  "key_flows": [
+    {
+      "name": "Core Funnel（核心轉化漏斗）",
+      "page_sequence": ["page-home", "page-tools", "page-tool-upload", "page-tool-result", "page-ai-style", "page-preview-configure", "page-checkout", "page-order-confirmed"],
+      "priority": "p0"
+    },
+    {
+      "name": "Express Checkout（快速通道）",
+      "page_sequence": ["page-ai-style", "page-preview-configure", "page-checkout", "page-order-confirmed"],
+      "priority": "p1"
+    },
+    {
+      "name": "Post-Purchase（售後體驗）",
+      "page_sequence": ["page-order-confirmed", "page-order-track"],
+      "priority": "p1"
+    },
+    {
+      "name": "Email Return（回購漏斗 V2）",
+      "page_sequence": ["page-mini-landing", "page-mini-checkout", "page-order-confirmed"],
+      "priority": "p2"
+    },
+    {
+      "name": "Tool → Share（免費裂變）",
+      "page_sequence": ["page-home", "page-tools", "page-tool-upload", "page-tool-result"],
+      "priority": "p1"
+    }
+  ],
+  "routing_table": [
+    { "route": "/", "page_id": "page-home", "method": "GET" },
+    { "route": "/tools", "page_id": "page-tools", "method": "GET" },
+    { "route": "/tools/upload", "page_id": "page-tool-upload", "method": "GET" },
+    { "route": "/tools/result", "page_id": "page-tool-result", "method": "GET" },
+    { "route": "/style", "page_id": "page-ai-style", "method": "GET" },
+    { "route": "/preview", "page_id": "page-preview-configure", "method": "GET" },
+    { "route": "/checkout", "page_id": "page-checkout", "method": "GET" },
+    { "route": "/confirmed", "page_id": "page-order-confirmed", "method": "GET" },
+    { "route": "/track", "page_id": "page-order-track", "method": "GET" },
+    { "route": "/mini", "page_id": "page-mini-landing", "method": "GET" },
+    { "route": "/mini/checkout", "page_id": "page-mini-checkout", "method": "GET" },
+    { "route": "/404", "page_id": "page-404", "method": "GET" }
+  ],
+  "metadata": {
+    "depth_max": 2,
+    "page_count": 12,
+    "nav_count": 3,
+    "flow_count": 5,
+    "platform_notes": "Web Mobile-First；Desktop 居中單欄 max-width 480px；全部 public 無 auth；Play/Memorial 共用頁面用模式切換",
+    "ia_decisions": [
+      "Minimal top bar（漏斗產品不需要多段導航）",
+      "全部 public（MVP 零登入）",
+      "Play/Memorial 共用頁面視覺切換（非兩套獨立頁面）",
+      "Mini 版獨立 /mini 前綴（V2 與 MVP 解耦）",
+      "每個關鍵頁可外部 deep link 直達"
+    ]
+  },
+  "sitemap_file": "spark-output/sitemap/petpaw-studio-sitemap.md"
+}
