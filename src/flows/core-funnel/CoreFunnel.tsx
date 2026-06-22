@@ -35,14 +35,14 @@ function compressImage(file: File, maxDim = 1024, quality = 0.8): Promise<string
 
 // ─── Costume Show Templates ───
 const COSTUME_TEMPLATES = [
-  { id: 'royal', emoji: '👑', title: 'Royal Portrait', desc: 'Renaissance oil painting', color: '#7C3AED' },
-  { id: 'superhero', emoji: '🦸', title: 'Superhero', desc: 'Save the world, one nap at a time', color: '#DC2626' },
-  { id: 'beach', emoji: '🏖️', title: 'Beach Vacation', desc: 'Tropical vibes & tiny sunglasses', color: '#0891B2' },
-  { id: 'europe', emoji: '🗼', title: 'Paris Trip', desc: 'Café, croissant, cute pet', color: '#DB2777' },
-  { id: 'sagrada', emoji: '⛪', title: 'Sagrada Familia', desc: 'Gaudi meets kitty', color: '#D97706' },
-  { id: 'space', emoji: '🚀', title: 'Space Explorer', desc: 'One small step for petkind', color: '#4F46E5' },
-  { id: 'christmas', emoji: '🎄', title: 'Holiday Festive', desc: 'Cozy holiday sweater vibes', color: '#059669' },
-  { id: 'anime', emoji: '🎌', title: 'Anime Hero', desc: 'Studio Ghibli cuteness', color: '#E11D48' },
+  { id: 'royal', emoji: '👑', title: 'Royal Portrait', desc: 'Renaissance oil painting', color: '#7C3AED', sample: '/samples/royal.jpg' },
+  { id: 'superhero', emoji: '🦸', title: 'Superhero', desc: 'Save the world, one nap at a time', color: '#DC2626', sample: '/samples/superhero.jpg' },
+  { id: 'beach', emoji: '🏖️', title: 'Beach Vacation', desc: 'Tropical vibes & tiny sunglasses', color: '#0891B2', sample: '/samples/beach.jpg' },
+  { id: 'europe', emoji: '🗼', title: 'Paris Trip', desc: 'Café, croissant, cute pet', color: '#DB2777', sample: '/samples/paris.jpg' },
+  { id: 'sagrada', emoji: '⛪', title: 'Sagrada Familia', desc: 'Gaudi meets kitty', color: '#D97706', sample: '/samples/sagrada.jpg' },
+  { id: 'space', emoji: '🚀', title: 'Space Explorer', desc: 'One small step for petkind', color: '#4F46E5', sample: '/samples/space.jpg' },
+  { id: 'christmas', emoji: '🎄', title: 'Holiday Festive', desc: 'Cozy holiday sweater vibes', color: '#059669', sample: '/samples/christmas.jpg' },
+  { id: 'anime', emoji: '🎌', title: 'Anime Hero', desc: 'Studio Ghibli cuteness', color: '#E11D48', sample: '/samples/anime.jpg' },
 ];
 
 // ─── Social Media Share Links ───
@@ -513,21 +513,30 @@ function ScreenCostumeShow({
         <p className="text-sm text-muted-foreground">Pick a theme and watch the magic happen</p>
       </div>
 
-      {/* ── Template Grid ── */}
+      {/* ── Template Grid (real AI sample photos) ── */}
       <div className="grid grid-cols-2 gap-3">
         {COSTUME_TEMPLATES.map(tpl => (
           <button key={tpl.id} onClick={() => setSelectedCostume(tpl.id)}
             className={cn(
-              "p-4 rounded-2xl border-2 text-center transition-all",
+              "relative rounded-2xl overflow-hidden text-left transition-all aspect-[3/4]",
               selectedCostume === tpl.id
-                ? "shadow-md scale-[1.02]"
-                : "border-border bg-white hover:border-muted-foreground/30"
+                ? "ring-2 shadow-lg scale-[1.02]"
+                : "ring-1 ring-border hover:ring-muted-foreground/40 hover:shadow-md"
             )}
-            style={selectedCostume === tpl.id ? { borderColor: tpl.color, backgroundColor: `${tpl.color}08` } : undefined}
+            style={selectedCostume === tpl.id ? { boxShadow: `0 4px 20px ${tpl.color}40` } : undefined}
           >
-            <span className="text-4xl block mb-2">{tpl.emoji}</span>
-            <p className="font-semibold text-foreground text-sm">{tpl.title}</p>
-            <p className="text-[11px] text-muted-foreground mt-0.5">{tpl.desc}</p>
+            <img src={tpl.sample} alt={tpl.title} className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            {selectedCostume === tpl.id && (
+              <div className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                style={{ backgroundColor: tpl.color }}>
+                ✓
+              </div>
+            )}
+            <div className="absolute bottom-0 left-0 right-0 p-3">
+              <p className="font-semibold text-white text-sm">{tpl.title}</p>
+              <p className="text-[11px] text-white/80 mt-0.5">{tpl.desc}</p>
+            </div>
           </button>
         ))}
       </div>
@@ -691,17 +700,20 @@ function ScreenResult({
       ) : (
         <div className="space-y-5">
           {/* Generated Costume Preview */}
-          <Card className="border-0 shadow-lg overflow-hidden">
-            <div className="h-2" style={{ backgroundColor: 'var(--petgenio-orange)' }} />
-            <CardContent className="p-6 space-y-3">
+          <Card className="border-0 shadow-xl overflow-hidden">
+            <div className="h-1.5" style={{ backgroundColor: 'var(--petgenio-orange)' }} />
+            <CardContent className="p-5 space-y-3">
               {generatedImage ? (
                 <div className="space-y-3">
-                  <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-b from-purple-50 to-pink-50">
+                  <div className="relative aspect-square rounded-2xl overflow-hidden shadow-md">
                     <img
                       src={generatedImage}
                       alt={`${pet.name}'s ${costumeName} costume`}
                       className="w-full h-full object-cover"
                     />
+                    <div className="absolute top-2 left-2 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-[10px] font-bold">
+                      ✨ AI Generated
+                    </div>
                   </div>
                   <p className="font-bold text-foreground text-center text-lg">{pet.name}'s {costumeName}</p>
                 </div>
@@ -726,30 +738,60 @@ function ScreenResult({
             </CardContent>
           </Card>
 
-          {/* ── Three Product Cards ── */}
-          <div className="space-y-2">
-            <p className="text-sm font-semibold text-foreground text-center">Turn This Into...</p>
+          {/* ── Product Mockup Cards (showing costume on products) ── */}
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-foreground text-center">Put {pet.name} on these →</p>
             <div className="grid grid-cols-3 gap-2">
+              {/* Plush Toy */}
               <button onClick={onNext}
-                className="p-3 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-md hover:scale-[1.02]">
-                <div className="w-full aspect-square rounded-xl bg-gradient-to-b from-orange-50 to-amber-50 flex items-center justify-center mb-2">
-                  <span className="text-4xl">🧸</span>
+                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-orange)]/40">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-orange-50 to-amber-50">
+                  {generatedImage ? (
+                    <>
+                      <img src={generatedImage} alt="Plush" className="absolute inset-0 w-full h-full object-cover rounded-xl" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-orange-900/20 to-transparent" />
+                      <div className="absolute inset-0 rounded-xl shadow-inner" style={{ boxShadow: 'inset 0 0 20px rgba(237,140,67,0.15)' }} />
+                    </>
+                  ) : (
+                    <div className="flex items-center justify-center h-full"><span className="text-4xl">🧸</span></div>
+                  )}
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold text-white bg-black/40 px-1.5 py-0.5 rounded-full backdrop-blur-sm">PLUSH</span>
                 </div>
                 <p className="font-semibold text-foreground text-xs">Plush Toy</p>
                 <p className="text-[10px] text-muted-foreground">From $99</p>
               </button>
+              {/* Phone Case */}
               <button onClick={onNext}
-                className="p-3 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-md hover:scale-[1.02]">
-                <div className="w-full aspect-square rounded-xl bg-gradient-to-b from-slate-50 to-gray-100 flex items-center justify-center mb-2">
-                  <span className="text-4xl">📱</span>
+                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-orange)]/40">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-slate-50 to-gray-100 flex items-center justify-center">
+                  {generatedImage ? (
+                    <div className="relative w-[60%] h-[85%] rounded-[10px] overflow-hidden ring-2 ring-gray-800 shadow-lg">
+                      <img src={generatedImage} alt="Phone Case" className="absolute inset-0 w-full h-full object-cover" />
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-gray-800 rounded-b-lg" />
+                    </div>
+                  ) : (
+                    <span className="text-4xl">📱</span>
+                  )}
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold text-white bg-black/40 px-1.5 py-0.5 rounded-full backdrop-blur-sm">CASE</span>
                 </div>
                 <p className="font-semibold text-foreground text-xs">Phone Case</p>
                 <p className="text-[10px] text-muted-foreground">From $39</p>
               </button>
+              {/* Key Charm */}
               <button onClick={onNext}
-                className="p-3 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-md hover:scale-[1.02]">
-                <div className="w-full aspect-square rounded-xl bg-gradient-to-b from-pink-50 to-rose-50 flex items-center justify-center mb-2">
-                  <span className="text-4xl">🔑</span>
+                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-orange)]/40">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-pink-50 to-rose-50 flex items-center justify-center">
+                  {generatedImage ? (
+                    <div className="relative flex flex-col items-center">
+                      <div className="w-3 h-3 rounded-full border-2 border-gray-400 mb-[-2px] z-10" />
+                      <div className="w-[55%] aspect-square rounded-full overflow-hidden ring-2 ring-gray-300 shadow-md">
+                        <img src={generatedImage} alt="Key Charm" className="w-full h-full object-cover" />
+                      </div>
+                    </div>
+                  ) : (
+                    <span className="text-4xl">🔑</span>
+                  )}
+                  <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-bold text-white bg-black/40 px-1.5 py-0.5 rounded-full backdrop-blur-sm">CHARM</span>
                 </div>
                 <p className="font-semibold text-foreground text-xs">Key Charm</p>
                 <p className="text-[10px] text-muted-foreground">From $29</p>
@@ -778,9 +820,9 @@ function ScreenResult({
             </div>
           </div>
 
-          <Button size="xl" className="w-full text-white rounded-2xl"
+          <Button size="xl" className="w-full text-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
             style={{ backgroundColor: 'var(--petgenio-orange)' }} onClick={onNext}>
-            See Products →
+            Get {pet.name}'s Merch →
           </Button>
         </div>
       )}
