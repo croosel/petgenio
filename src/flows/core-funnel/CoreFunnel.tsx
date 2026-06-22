@@ -89,6 +89,43 @@ function brandColor() {
   return 'var(--petgenio-orange)';
 }
 
+// Generate a dynamic order number: PG-YYYYMMDD-XXXX
+function generateOrderNumber(): string {
+  const now = new Date();
+  const ymd = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+  const rand = String(Math.floor(1000 + Math.random() * 9000));
+  return `PG-${ymd}-${rand}`;
+}
+
+// Calculate delivery date range (7–14 days from now, based on the "what happens next" timeline)
+function getDeliveryRange(): string {
+  const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const start = new Date();
+  start.setDate(start.getDate() + 7);
+  const end = new Date();
+  end.setDate(end.getDate() + 14);
+  return `${fmt(start)} – ${fmt(end)}`;
+}
+
+// Generate semi-random personality traits seeded by pet name
+function generateTraits(petName: string): { emoji: string; label: string; value: number; color: string }[] {
+  // Simple hash from pet name for stable-but-varied results
+  const hash = petName.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const traits = [
+    { emoji: '😎', label: 'Charm Level', color: '#F59E0B', base: 75, range: 24 },
+    { emoji: '😴', label: 'Nap Master', color: '#8B5CF6', base: 60, range: 39 },
+    { emoji: '🍖', label: 'Treat Drive', color: '#EF4444', base: 80, range: 19 },
+    { emoji: '👑', label: 'Royalty Vibe', color: '#7C3AED', base: 70, range: 29 },
+    { emoji: '🧠', label: 'Sassiness', color: '#EC4899', base: 50, range: 48 },
+    { emoji: '❤️', label: 'Cuddle Score', color: '#F43F5E', base: 70, range: 29 },
+  ];
+  return traits.map((t, i) => {
+    const seed = (hash * 31 + i * 17) % t.range;
+    const value = Math.min(t.base + seed, 99);
+    return { ...t, value };
+  });
+}
+
 // ═══════════════════════════════════════════════════════
 //  CORE FUNNEL COMPONENT — 7 Screens
 // ═══════════════════════════════════════════════════════
@@ -104,9 +141,19 @@ export default function CoreFunnel() {
   const [selectedCostume, setSelectedCostume] = useState<string | null>(null);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [genError, setGenError] = useState<string | null>(null);
+  const [orderNumber, setOrderNumber] = useState('');
 
   // ─── Navigation ───
-  const next = useCallback(() => setScreen(s => Math.min(s + 1, 6) as ScreenIndex), []);
+  const next = useCallback(() => {
+    setScreen(s => {
+      const nextScreen = Math.min(s + 1, 6) as ScreenIndex;
+      // Generate order number when entering checkout
+      if (nextScreen === 5 && !orderNumber) {
+        setOrderNumber(generateOrderNumber());
+      }
+      return nextScreen;
+    });
+  }, [orderNumber]);
   const prev = useCallback(() => setScreen(s => Math.max(s - 1, 0) as ScreenIndex), []);
 
   // ─── Progress percentage ───
@@ -168,7 +215,9 @@ export default function CoreFunnel() {
             onNext={next}
           />
         )}
-        {screen === 6 && <ScreenConfirmed />}
+        {screen === 6 && (
+          <ScreenConfirmed petName={pet.name} generatedImage={generatedImage} orderNumber={orderNumber} />
+        )}
       </main>
     </div>
   );
@@ -436,6 +485,16 @@ function ScreenCostumeShow({
 }: {
   selectedCostume: string | null; setSelectedCostume: (c: string | null) => void; onNext: () => void;
 }) {
+  const [customRequest, setCustomRequest] = useState('');
+  const [requestSubmitted, setRequestSubmitted] = useState(false);
+
+  const handleRequest = () => {
+    if (!customRequest.trim()) return;
+    setRequestSubmitted(true);
+    setCustomRequest('');
+    setTimeout(() => setRequestSubmitted(false), 4000);
+  };
+
   return (
     <div className="py-6 space-y-6">
       <div className="text-center space-y-1">
@@ -491,14 +550,24 @@ function ScreenCostumeShow({
         <p className="text-sm font-semibold text-foreground text-center">Don't see your idea?</p>
         <div className="flex gap-2">
           <input
+            value={customRequest}
+            onChange={e => setCustomRequest(e.target.value)}
+            onKeyDown={e => { if (e.key === 'Enter') handleRequest(); }}
             placeholder="e.g. Samurai, Harry Potter, Sushi Chef..."
             className="flex-1 h-11 px-4 rounded-xl border border-input bg-background text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-ring"
           />
-          <Button variant="outline" className="shrink-0 rounded-xl" onClick={() => {}}>
-            Request
+          <Button variant="outline" className="shrink-0 rounded-xl"
+            onClick={handleRequest} disabled={!customRequest.trim() || requestSubmitted}>
+            {requestSubmitted ? '✓' : 'Request'}
           </Button>
         </div>
-        <p className="text-[11px] text-muted-foreground text-center">We'll build it and notify you — usually within 24hrs</p>
+        {requestSubmitted ? (
+          <p className="text-[11px] text-green-600 font-medium text-center">
+            Got it! We'll work on "{customRequest || 'your idea'}" and notify you within 24hrs 🎨
+          </p>
+        ) : (
+          <p className="text-[11px] text-muted-foreground text-center">We'll build it and notify you — usually within 24hrs</p>
+        )}
       </div>
 
       {/* ── CTA ── */}
@@ -682,23 +751,16 @@ function ScreenResult({
           <div className="space-y-2">
             <p className="text-sm font-semibold text-foreground text-center">{pet.name}'s Character</p>
             <div className="grid grid-cols-2 gap-2">
-              {[
-                { emoji: '😎', label: 'Charm Level', value: '94%', color: '#F59E0B' },
-                { emoji: '😴', label: 'Nap Master', value: '87%', color: '#8B5CF6' },
-                { emoji: '🍖', label: 'Treat Drive', value: '99%', color: '#EF4444' },
-                { emoji: '👑', label: 'Royalty Vibe', value: '91%', color: '#7C3AED' },
-                { emoji: '🧠', label: 'Sassiness', value: '78%', color: '#EC4899' },
-                { emoji: '❤️', label: 'Cuddle Score', value: '96%', color: '#F43F5E' },
-              ].map(trait => (
+              {generateTraits(pet.name).map(trait => (
                 <div key={trait.label} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-border">
                   <span className="text-2xl">{trait.emoji}</span>
                   <div className="flex-1 min-w-0">
                     <p className="text-[11px] text-muted-foreground">{trait.label}</p>
                     <div className="flex items-center gap-2">
                       <div className="flex-1 h-2 rounded-full bg-secondary overflow-hidden">
-                        <div className="h-full rounded-full" style={{ width: trait.value, backgroundColor: trait.color }} />
+                        <div className="h-full rounded-full" style={{ width: `${trait.value}%`, backgroundColor: trait.color }} />
                       </div>
-                      <span className="text-xs font-bold text-foreground">{trait.value}</span>
+                      <span className="text-xs font-bold text-foreground">{trait.value}%</span>
                     </div>
                   </div>
                 </div>
@@ -975,7 +1037,7 @@ function ScreenCheckout({
             </div>
             <div>
               <p className="text-muted-foreground">Delivery</p>
-              <p className="font-medium text-foreground">Jun 28 – Jul 2</p>
+              <p className="font-medium text-foreground">{getDeliveryRange()}</p>
             </div>
           </div>
 
@@ -1030,13 +1092,63 @@ function ScreenCheckout({
 // ═══════════════════════════════════════════════════════
 //  SCREEN 6 — CONFIRMED (Order Confirmation)
 // ═══════════════════════════════════════════════════════
-function ScreenConfirmed() {
+function ScreenConfirmed({
+  petName, generatedImage, orderNumber,
+}: {
+  petName: string; generatedImage: string | null; orderNumber: string;
+}) {
   const [showConfetti, setShowConfetti] = useState(true);
+  const [shared, setShared] = useState(false);
 
   useEffect(() => {
     const t = setTimeout(() => setShowConfetti(false), 3000);
     return () => clearTimeout(t);
   }, []);
+
+  const deliveryRange = getDeliveryRange();
+
+  const handleShare = async () => {
+    const shareText = `Check out ${petName}'s AI costume from PetGenio! 🐾✨ #PetGenio #AIPetCostume`;
+
+    // Try Web Share API with image
+    if (generatedImage && navigator.share) {
+      try {
+        const response = await fetch(generatedImage);
+        const blob = await response.blob();
+        const file = new File([blob], `${petName}-petgenio.jpg`, { type: blob.type });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ text: shareText, files: [file] });
+          setShared(true);
+          return;
+        }
+        await navigator.share({ text: shareText });
+        setShared(true);
+        return;
+      } catch { /* user cancelled, fall through */ }
+    }
+
+    // Fallback: copy text to clipboard
+    try {
+      await navigator.clipboard.writeText(shareText);
+      setShared(true);
+    } catch { /* clipboard failed */ }
+  };
+
+  const shareUrls: Record<string, string> = {
+    Facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://petgenio-nine.vercel.app')}&quote=${encodeURIComponent(`Check out ${petName}'s AI costume! 🐾✨`)}`,
+    X: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Check out ${petName}'s AI costume from PetGenio! 🐾✨ #PetGenio #AIPetCostume`)}&url=${encodeURIComponent('https://petgenio-nine.vercel.app')}`,
+    LinkedIn: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent('https://petgenio-nine.vercel.app')}`,
+  };
+
+  const handleSocialClick = (name: string) => {
+    const url = shareUrls[name];
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer,width=600,height=500');
+    } else {
+      // TikTok / Instagram — no web share URL, use native share or clipboard
+      handleShare();
+    }
+  };
 
   return (
     <div className="py-10 space-y-8 text-center">
@@ -1071,11 +1183,11 @@ function ScreenConfirmed() {
         <CardContent className="p-5 space-y-3">
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Order #</span>
-            <span className="font-medium text-foreground">PG-2026-0621</span>
+            <span className="font-medium text-foreground">{orderNumber || generateOrderNumber()}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Estimated Delivery</span>
-            <span className="font-medium text-foreground">Jun 28 – Jul 2</span>
+            <span className="font-medium text-foreground">{deliveryRange}</span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Tracking</span>
@@ -1133,12 +1245,18 @@ function ScreenConfirmed() {
           <div className="flex gap-2">
             {SOCIAL_LINKS.map(social => (
               <button key={social.name}
-                className="flex-1 flex items-center justify-center gap-1 py-2.5 rounded-xl text-white text-xs font-semibold"
+                onClick={() => handleSocialClick(social.name)}
+                className="flex-1 flex items-center justify-center gap-1 py-2.5 rounded-xl text-white text-xs font-semibold transition-opacity hover:opacity-80"
                 style={{ backgroundColor: social.color }}>
                 <span>{social.emoji}</span>
               </button>
             ))}
           </div>
+          {shared && (
+            <p className="text-[11px] text-green-600 font-medium text-center">
+              ✓ Shared! Thanks for spreading the joy!
+            </p>
+          )}
           <p className="text-[11px] text-muted-foreground text-center">
             10 posts = Free Key Charm · 25 posts = Free Phone Case · Unlimited fun!
           </p>
