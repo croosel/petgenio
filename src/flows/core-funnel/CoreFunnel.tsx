@@ -245,28 +245,39 @@ function ScreenHome({ onNext }: { onNext: () => void }) {
         Start Dress-Up
       </Button>
 
-      {/* ── Bento Grid Preview ── */}
+      {/* ── Bento Grid Preview (real AI-generated samples) ── */}
       <div className="grid grid-cols-3 gap-2">
-        <div className="col-span-2 row-span-2 rounded-2xl bg-gradient-to-br from-purple-100 to-pink-50 p-4 flex flex-col items-center justify-center text-center min-h-[160px] border border-border">
-          <span className="text-5xl mb-2">👑</span>
-          <p className="font-bold text-foreground text-sm">Royal Portrait</p>
-          <p className="text-[11px] text-muted-foreground">Your pet, painted like royalty</p>
+        <div className="col-span-2 row-span-2 rounded-2xl overflow-hidden border border-border min-h-[160px] relative group">
+          <img src="/samples/royal.jpg" alt="Royal Portrait" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
+            <p className="font-bold text-sm">Royal Portrait</p>
+            <p className="text-[11px] opacity-90">Your pet, painted like royalty</p>
+          </div>
         </div>
-        <div className="rounded-2xl bg-gradient-to-br from-cyan-50 to-blue-100 p-3 flex flex-col items-center justify-center text-center border border-border">
-          <span className="text-2xl">🏖️</span>
-          <p className="font-medium text-foreground text-[11px] mt-1">Beach Day</p>
+        <div className="rounded-2xl overflow-hidden border border-border aspect-square relative">
+          <img src="/samples/beach.jpg" alt="Beach Day" className="w-full h-full object-cover" />
+          <div className="absolute bottom-0 left-0 right-0 p-1.5 bg-gradient-to-t from-black/50 to-transparent">
+            <p className="text-[11px] font-medium text-white">Beach</p>
+          </div>
         </div>
-        <div className="rounded-2xl bg-gradient-to-br from-red-50 to-orange-100 p-3 flex flex-col items-center justify-center text-center border border-border">
-          <span className="text-2xl">🦸</span>
-          <p className="font-medium text-foreground text-[11px] mt-1">Superhero</p>
+        <div className="rounded-2xl overflow-hidden border border-border aspect-square relative">
+          <img src="/samples/superhero.jpg" alt="Superhero" className="w-full h-full object-cover" />
+          <div className="absolute bottom-0 left-0 right-0 p-1.5 bg-gradient-to-t from-black/50 to-transparent">
+            <p className="text-[11px] font-medium text-white">Hero</p>
+          </div>
         </div>
-        <div className="rounded-2xl bg-gradient-to-br from-amber-50 to-yellow-100 p-3 flex flex-col items-center justify-center text-center border border-border">
-          <span className="text-2xl">🗼</span>
-          <p className="font-medium text-foreground text-[11px] mt-1">Paris Trip</p>
+        <div className="rounded-2xl overflow-hidden border border-border aspect-square relative">
+          <img src="/samples/paris.jpg" alt="Paris Trip" className="w-full h-full object-cover" />
+          <div className="absolute bottom-0 left-0 right-0 p-1.5 bg-gradient-to-t from-black/50 to-transparent">
+            <p className="text-[11px] font-medium text-white">Paris</p>
+          </div>
         </div>
-        <div className="rounded-2xl bg-gradient-to-br from-indigo-50 to-violet-100 p-3 flex flex-col items-center justify-center text-center border border-border">
-          <span className="text-2xl">🚀</span>
-          <p className="font-medium text-foreground text-[11px] mt-1">Space</p>
+        <div className="rounded-2xl overflow-hidden border border-border aspect-square relative">
+          <img src="/samples/space.jpg" alt="Space Explorer" className="w-full h-full object-cover" />
+          <div className="absolute bottom-0 left-0 right-0 p-1.5 bg-gradient-to-t from-black/50 to-transparent">
+            <p className="text-[11px] font-medium text-white">Space</p>
+          </div>
         </div>
       </div>
 
@@ -529,15 +540,14 @@ function ScreenCostumeShow({
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
           {[
-            { emoji: '🐱', costume: '👑', label: 'Luna as Queen' },
-            { emoji: '🐶', costume: '🦸', label: 'Max the Hero' },
-            { emoji: '🐱', costume: '🏖️', label: 'Mochi on Beach' },
-            { emoji: '🐶', costume: '🚀', label: 'Buddy in Space' },
+            { img: '/samples/comm-luna-queen.jpg', label: 'Luna as Queen' },
+            { img: '/samples/comm-max-hero.jpg', label: 'Max the Hero' },
+            { img: '/samples/comm-mochi-beach.jpg', label: 'Mochi on Beach' },
+            { img: '/samples/comm-buddy-space.jpg', label: 'Buddy in Space' },
           ].map((item, i) => (
             <div key={i} className="shrink-0 w-[120px] snap-start rounded-xl border border-border bg-white overflow-hidden">
-              <div className="h-24 bg-secondary flex items-center justify-center text-3xl relative">
-                <span>{item.emoji}</span>
-                <span className="absolute top-1 right-1 text-lg">{item.costume}</span>
+              <div className="h-24 overflow-hidden">
+                <img src={item.img} alt={item.label} className="w-full h-full object-cover" />
               </div>
               <p className="text-[11px] font-medium text-foreground p-2 text-center">{item.label}</p>
             </div>
