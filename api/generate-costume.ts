@@ -112,7 +112,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const requestBody: Record<string, unknown> = {
       model: endpointId,
       prompt,
-      size: '1024x1024',
+      size: '1920x1920', // Seedream requires minimum 3,686,400 pixels (1920²)
       n: 1,
       response_format: 'b64_json',
     };
