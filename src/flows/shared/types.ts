@@ -7,7 +7,7 @@ export type AIStyle = 'pixar' | 'blind-box' | 'royal';
 export type Softness = 'soft' | 'medium' | 'firm';
 export type Size = 'mini' | 'standard' | 'jumbo';
 export type Scent = 'lavender' | 'vanilla' | 'unscented';
-export type BoxColor = 'orange' | 'gold' | 'cream' | 'charcoal';
+export type BoxColor = 'teal' | 'sand' | 'mint' | 'deep';
 
 export interface ProductConfig {
   softness: Softness;

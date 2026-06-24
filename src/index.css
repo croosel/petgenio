@@ -4,35 +4,54 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --radius: 0.75rem;
-  --background: oklch(0.98 0.005 60);
-  --foreground: oklch(0.18 0.02 50);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.02 50);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.02 50);
-  --primary: oklch(0.68 0.18 55);
+  /* Deep Teal Modern — Design System V2 */
+  --radius: 16px;
+  --background: oklch(0.98 0.006 175);     /* #F0FDFA — airy teal tint */
+  --foreground: oklch(0.33 0.04 175);      /* #134E4A — deep teal-dark text */
+  --card: oklch(0.97 0.008 175);           /* #E6FFFA — surface */
+  --card-foreground: oklch(0.33 0.04 175);
+  --popover: oklch(1 0 0);                 /* white — elevated surfaces */
+  --popover-foreground: oklch(0.33 0.04 175);
+  --primary: oklch(0.63 0.14 175);         /* #0D9488 — Deep Teal */
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0.015 60);
-  --secondary-foreground: oklch(0.25 0.03 50);
-  --muted: oklch(0.95 0.01 60);
-  --muted-foreground: oklch(0.50 0.02 50);
-  --accent: oklch(0.95 0.015 60);
-  --accent-foreground: oklch(0.25 0.03 50);
+  --secondary: oklch(0.76 0.09 70);        /* #D4A574 — Warm Sand */
+  --secondary-foreground: oklch(0.25 0.04 50);
+  --muted: oklch(0.96 0.008 175);          /* teal-tinted muted bg */
+  --muted-foreground: oklch(0.55 0.025 175); /* #5B7B77 — muted text */
+  --accent: oklch(0.68 0.18 15);           /* #FB7185 — Coral */
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.58 0.2 25);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.91 0.01 60);
-  --input: oklch(0.91 0.01 60);
-  --ring: oklch(0.68 0.18 55);
-  --chart-1: oklch(0.68 0.18 55);
-  --chart-2: oklch(0.72 0.12 75);
-  --chart-3: oklch(0.60 0.15 40);
-  --chart-4: oklch(0.78 0.10 80);
-  --chart-5: oklch(0.65 0.20 30);
-  --petgenio-orange: #ED8C43;
-  --petgenio-gold: #D4A574;
-  --petgenio-cream: #FFF8F0;
-  --petgenio-charcoal: #2D2D2D;
+  --border: oklch(0.91 0.015 175);         /* teal-tinted border */
+  --input: oklch(0.91 0.015 175);
+  --ring: oklch(0.63 0.14 175);            /* same as primary */
+  --chart-1: oklch(0.63 0.14 175);         /* Deep Teal */
+  --chart-2: oklch(0.76 0.09 70);          /* Warm Sand */
+  --chart-3: oklch(0.68 0.18 15);          /* Coral */
+  --chart-4: oklch(0.70 0.12 175);         /* Light Teal */
+  --chart-5: oklch(0.72 0.10 50);          /* Warm amber */
+
+  /* Brand tokens */
+  --petgenio-teal: #0D9488;
+  --petgenio-teal-light: #14B8A6;
+  --petgenio-sand: #D4A574;
+  --petgenio-coral: #FB7185;
+  --petgenio-bg: #F0FDFA;
+  --petgenio-surface: #E6FFFA;
+  --petgenio-text: #134E4A;
+  --petgenio-text-muted: #5B7B77;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #0D9488 0%, #D4A574 50%, #FB7185 100%);
+  --gradient-cool: linear-gradient(135deg, #0D9488 0%, #14B8A6 100%);
+  --gradient-warm: linear-gradient(135deg, #D4A574 0%, #FB7185 100%);
+
+  /* Shadows (teal-tinted) */
+  --shadow-sm: 0 1px 3px rgba(13,148,136,0.06), 0 1px 2px rgba(13,148,136,0.04);
+  --shadow-md: 0 4px 12px rgba(13,148,136,0.08), 0 2px 4px rgba(13,148,136,0.04);
+  --shadow-lg: 0 12px 32px rgba(13,148,136,0.10), 0 4px 8px rgba(13,148,136,0.06);
+  --shadow-xl: 0 20px 48px rgba(13,148,136,0.14), 0 8px 16px rgba(13,148,136,0.08);
+  --shadow-glow: 0 0 20px rgba(13,148,136,0.25);
 }
 
 @theme inline {
@@ -60,10 +79,11 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 10px);
+  --radius-md: calc(var(--radius) - 4px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --radius-full: 9999px;
 }
 
 @layer base {
@@ -72,7 +92,10 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
     margin: 0;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Inter', sans-serif;
   }
 }

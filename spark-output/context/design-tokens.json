@@ -1,0 +1,81 @@
+{
+  "scheme": "deep-teal-modern",
+  "tokens": {
+    "color": {
+      "primary": { "value": "#0D9488", "type": "color", "description": "Deep Teal — trust, modern, fresh" },
+      "primary-light": { "value": "#14B8A6", "type": "color", "description": "Lighter teal for hover states" },
+      "primary-dark": { "value": "#0F766E", "type": "color", "description": "Darker teal for active/pressed" },
+      "primary-50": { "value": "#F0FDFA", "type": "color", "description": "Teal 50 — page background" },
+      "primary-100": { "value": "#CCFBF1", "type": "color", "description": "Teal 100 — subtle backgrounds" },
+      "primary-200": { "value": "#99F6E4", "type": "color", "description": "Teal 200 — borders, dividers" },
+      "secondary": { "value": "#D4A574", "type": "color", "description": "Warm Sand — warmth, approachability" },
+      "secondary-light": { "value": "#E8C9A0", "type": "color", "description": "Lighter sand for hover" },
+      "secondary-dark": { "value": "#B8895A", "type": "color", "description": "Darker sand for active" },
+      "accent": { "value": "#FB7185", "type": "color", "description": "Coral — energy, CTA highlights" },
+      "accent-light": { "value": "#FDA4AF", "type": "color", "description": "Lighter coral" },
+      "accent-dark": { "value": "#E11D48", "type": "color", "description": "Darker coral for contrast" },
+      "background": { "value": "#F0FDFA", "type": "color", "description": "Page background — airy teal tint" },
+      "surface": { "value": "#E6FFFA", "type": "color", "description": "Card/surface background" },
+      "surface-elevated": { "value": "#FFFFFF", "type": "color", "description": "Elevated cards, modals" },
+      "text": { "value": "#134E4A", "type": "color", "description": "Primary text — deep teal-dark" },
+      "text-secondary": { "value": "#5B7B77", "type": "color", "description": "Secondary/muted text" },
+      "text-tertiary": { "value": "#94A3A0", "type": "color", "description": "Placeholder, disabled text" },
+      "border": { "value": "#D1E7E4", "type": "color", "description": "Default border" },
+      "border-strong": { "value": "#A3CCC7", "type": "color", "description": "Strong border, focus rings" },
+      "success": { "value": "#10B981", "type": "color", "description": "Success state" },
+      "warning": { "value": "#F59E0B", "type": "color", "description": "Warning state" },
+      "error": { "value": "#EF4444", "type": "color", "description": "Error state" },
+      "info": { "value": "#0D9488", "type": "color", "description": "Info state — same as primary" }
+    },
+    "typography": {
+      "font-heading": { "value": "'Outfit', sans-serif", "type": "fontFamily" },
+      "font-body": { "value": "'Inter', sans-serif", "type": "fontFamily" },
+      "font-mono": { "value": "'JetBrains Mono', monospace", "type": "fontFamily" },
+      "heading-xl": { "value": "2rem", "type": "fontSize", "lineHeight": "1.2", "fontWeight": "700" },
+      "heading-lg": { "value": "1.5rem", "type": "fontSize", "lineHeight": "1.3", "fontWeight": "700" },
+      "heading-md": { "value": "1.25rem", "type": "fontSize", "lineHeight": "1.4", "fontWeight": "600" },
+      "heading-sm": { "value": "1.125rem", "type": "fontSize", "lineHeight": "1.4", "fontWeight": "600" },
+      "body-lg": { "value": "1rem", "type": "fontSize", "lineHeight": "1.6", "fontWeight": "400" },
+      "body-md": { "value": "0.875rem", "type": "fontSize", "lineHeight": "1.5", "fontWeight": "400" },
+      "body-sm": { "value": "0.75rem", "type": "fontSize", "lineHeight": "1.5", "fontWeight": "400" },
+      "caption": { "value": "0.6875rem", "type": "fontSize", "lineHeight": "1.4", "fontWeight": "500" }
+    },
+    "shape": {
+      "radius-xs": { "value": "6px", "type": "borderRadius" },
+      "radius-sm": { "value": "10px", "type": "borderRadius" },
+      "radius-md": { "value": "16px", "type": "borderRadius", "description": "Cards, modals" },
+      "radius-lg": { "value": "20px", "type": "borderRadius" },
+      "radius-xl": { "value": "24px", "type": "borderRadius" },
+      "radius-full": { "value": "9999px", "type": "borderRadius", "description": "Capsule buttons, pills, badges" }
+    },
+    "shadow": {
+      "sm": { "value": "0 1px 3px rgba(13,148,136,0.06), 0 1px 2px rgba(13,148,136,0.04)", "type": "boxShadow" },
+      "md": { "value": "0 4px 12px rgba(13,148,136,0.08), 0 2px 4px rgba(13,148,136,0.04)", "type": "boxShadow" },
+      "lg": { "value": "0 12px 32px rgba(13,148,136,0.10), 0 4px 8px rgba(13,148,136,0.06)", "type": "boxShadow" },
+      "xl": { "value": "0 20px 48px rgba(13,148,136,0.14), 0 8px 16px rgba(13,148,136,0.08)", "type": "boxShadow" },
+      "glow-primary": { "value": "0 0 20px rgba(13,148,136,0.25)", "type": "boxShadow" },
+      "glow-accent": { "value": "0 0 20px rgba(251,113,133,0.25)", "type": "boxShadow" }
+    },
+    "spacing": {
+      "xs": { "value": "4px", "type": "spacing" },
+      "sm": { "value": "8px", "type": "spacing" },
+      "md": { "value": "12px", "type": "spacing" },
+      "lg": { "value": "16px", "type": "spacing" },
+      "xl": { "value": "24px", "type": "spacing" },
+      "2xl": { "value": "32px", "type": "spacing" },
+      "3xl": { "value": "48px", "type": "spacing" }
+    },
+    "gradient": {
+      "brand": { "value": "linear-gradient(135deg, #0D9488 0%, #D4A574 50%, #FB7185 100%)", "type": "gradient" },
+      "primary-subtle": { "value": "linear-gradient(135deg, #F0FDFA 0%, #CCFBF1 100%)", "type": "gradient" },
+      "warm": { "value": "linear-gradient(135deg, #D4A574 0%, #FB7185 100%)", "type": "gradient" },
+      "cool": { "value": "linear-gradient(135deg, #0D9488 0%, #14B8A6 100%)", "type": "gradient" }
+    },
+    "transition": {
+      "fast": { "value": "150ms ease", "type": "transition" },
+      "normal": { "value": "250ms ease", "type": "transition" },
+      "slow": { "value": "400ms ease", "type": "transition" },
+      "spring": { "value": "500ms cubic-bezier(0.34, 1.56, 0.64, 1)", "type": "transition" }
+    }
+  }
+}

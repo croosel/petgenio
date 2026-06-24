@@ -1,0 +1,33 @@
+{
+  "project_name": "PetGenio",
+  "selected_scheme": "deep-teal-modern",
+  "scheme_name": "Deep Teal Modern",
+  "scheme_name_zh": "深青摩登",
+  "tagline": "Trustworthy + Modern + Fresh — 北美最受歡迎的青藍色系，2026 趨勢色",
+  "colors": {
+    "primary": "#0D9488",
+    "secondary": "#D4A574",
+    "accent": "#FB7185",
+    "background": "#F0FDFA",
+    "surface": "#E6FFFA",
+    "text": "#134E4A",
+    "textMuted": "#5B7B77"
+  },
+  "typography": {
+    "fontHeading": "Outfit",
+    "fontBody": "Inter"
+  },
+  "shape": {
+    "borderRadius": "16px",
+    "buttonStyle": "capsule (full round)"
+  },
+  "shadow": "crisp, teal-accented",
+  "gradient": "linear-gradient(135deg, #0D9488 0%, #D4A574 50%, #FB7185 100%)",
+  "research_basis": {
+    "app_store_top100": "Blue 26%, Red 24%, Yellow 9% (declining)",
+    "pantone_2026": "Cloud Dancer (white) — simplification, clarity, calm",
+    "trending_2026": "Deep Teal, Glacial Blue, Chocolate Brown, Rich Gold",
+    "pet_brand_gap": "Lavender, Rose Gold, Deep Teal completely unused in pet brands",
+    "north_america_psychology": "Blue=Trust, Green=Growth, Purple=Creative Premium, Pink=Playful Youth"
+  }
+}

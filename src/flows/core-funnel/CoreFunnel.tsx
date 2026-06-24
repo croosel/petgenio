@@ -35,23 +35,23 @@ function compressImage(file: File, maxDim = 1024, quality = 0.8): Promise<string
 
 // ─── Costume Show Templates ───
 const COSTUME_TEMPLATES = [
-  { id: 'royal', emoji: '👑', title: 'Royal Portrait', desc: 'Renaissance oil painting', color: '#7C3AED', sample: '/samples/royal.jpg' },
-  { id: 'superhero', emoji: '🦸', title: 'Superhero', desc: 'Save the world, one nap at a time', color: '#DC2626', sample: '/samples/superhero.jpg' },
-  { id: 'beach', emoji: '🏖️', title: 'Beach Vacation', desc: 'Tropical vibes & tiny sunglasses', color: '#0891B2', sample: '/samples/beach.jpg' },
-  { id: 'europe', emoji: '🗼', title: 'Paris Trip', desc: 'Café, croissant, cute pet', color: '#DB2777', sample: '/samples/paris.jpg' },
-  { id: 'sagrada', emoji: '⛪', title: 'Sagrada Familia', desc: 'Gaudi meets kitty', color: '#D97706', sample: '/samples/sagrada.jpg' },
-  { id: 'space', emoji: '🚀', title: 'Space Explorer', desc: 'One small step for petkind', color: '#4F46E5', sample: '/samples/space.jpg' },
-  { id: 'christmas', emoji: '🎄', title: 'Holiday Festive', desc: 'Cozy holiday sweater vibes', color: '#059669', sample: '/samples/christmas.jpg' },
-  { id: 'anime', emoji: '🎌', title: 'Anime Hero', desc: 'Studio Ghibli cuteness', color: '#E11D48', sample: '/samples/anime.jpg' },
+  { id: 'royal', emoji: '👑', title: 'Royal Portrait', desc: 'Renaissance oil painting', color: '#0D9488', sample: '/samples/royal.jpg' },
+  { id: 'superhero', emoji: '🦸', title: 'Superhero', desc: 'Save the world, one nap at a time', color: '#FB7185', sample: '/samples/superhero.jpg' },
+  { id: 'beach', emoji: '🏖️', title: 'Beach Vacation', desc: 'Tropical vibes & tiny sunglasses', color: '#0D9488', sample: '/samples/beach.jpg' },
+  { id: 'europe', emoji: '🗼', title: 'Paris Trip', desc: 'Café, croissant, cute pet', color: '#FB7185', sample: '/samples/paris.jpg' },
+  { id: 'sagrada', emoji: '⛪', title: 'Sagrada Familia', desc: 'Gaudi meets kitty', color: '#D4A574', sample: '/samples/sagrada.jpg' },
+  { id: 'space', emoji: '🚀', title: 'Space Explorer', desc: 'One small step for petkind', color: '#0D9488', sample: '/samples/space.jpg' },
+  { id: 'christmas', emoji: '🎄', title: 'Holiday Festive', desc: 'Cozy holiday sweater vibes', color: '#0D9488', sample: '/samples/christmas.jpg' },
+  { id: 'anime', emoji: '🎌', title: 'Anime Hero', desc: 'Studio Ghibli cuteness', color: '#FB7185', sample: '/samples/anime.jpg' },
 ];
 
 // ─── Social Media Share Links ───
 const SOCIAL_LINKS = [
-  { name: 'TikTok', emoji: '🎵', color: '#ED8C43' },
+  { name: 'TikTok', emoji: '🎵', color: '#0D9488' },
   { name: 'Instagram', emoji: '📷', color: '#D4A574' },
-  { name: 'Facebook', emoji: '👤', color: '#E8A87C' },
-  { name: 'X', emoji: '𝕏', color: '#D97706' },
-  { name: 'LinkedIn', emoji: '💼', color: '#C08552' },
+  { name: 'Facebook', emoji: '👤', color: '#FB7185' },
+  { name: 'X', emoji: '𝕏', color: '#134E4A' },
+  { name: 'LinkedIn', emoji: '💼', color: '#5B7B77' },
 ];
 
 // ─── Style cards data (for plush) ───
@@ -78,15 +78,15 @@ const SCENT_OPTIONS: { id: Scent; label: string; emoji: string }[] = [
   { id: 'unscented', label: 'Unscented', emoji: '🌿' },
 ];
 const BOX_COLORS: { id: BoxColor; hex: string; label: string }[] = [
-  { id: 'orange', hex: '#ED8C43', label: 'Warm Orange' },
-  { id: 'gold', hex: '#D4A574', label: 'Muted Gold' },
-  { id: 'cream', hex: '#FFF8F0', label: 'Cream' },
-  { id: 'charcoal', hex: '#2D2D2D', label: 'Charcoal' },
+  { id: 'teal', hex: '#0D9488', label: 'Deep Teal' },
+  { id: 'sand', hex: '#D4A574', label: 'Warm Sand' },
+  { id: 'mint', hex: '#F0FDFA', label: 'Mint Cream' },
+  { id: 'deep', hex: '#134E4A', label: 'Teal Dark' },
 ];
 
 // ─── Helpers ───
 function brandColor() {
-  return 'var(--petgenio-orange)';
+  return 'var(--petgenio-teal)';
 }
 
 // Generate a dynamic order number: PG-YYYYMMDD-XXXX
@@ -112,12 +112,12 @@ function generateTraits(petName: string): { emoji: string; label: string; value:
   // Simple hash from pet name for stable-but-varied results
   const hash = petName.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
   const traits = [
-    { emoji: '😎', label: 'Charm Level', color: '#F59E0B', base: 75, range: 24 },
-    { emoji: '😴', label: 'Nap Master', color: '#8B5CF6', base: 60, range: 39 },
-    { emoji: '🍖', label: 'Treat Drive', color: '#EF4444', base: 80, range: 19 },
-    { emoji: '👑', label: 'Royalty Vibe', color: '#7C3AED', base: 70, range: 29 },
-    { emoji: '🧠', label: 'Sassiness', color: '#EC4899', base: 50, range: 48 },
-    { emoji: '❤️', label: 'Cuddle Score', color: '#F43F5E', base: 70, range: 29 },
+    { emoji: '😎', label: 'Charm Level', color: '#0D9488', base: 75, range: 24 },
+    { emoji: '😴', label: 'Nap Master', color: '#5B7B77', base: 60, range: 39 },
+    { emoji: '🍖', label: 'Treat Drive', color: '#FB7185', base: 80, range: 19 },
+    { emoji: '👑', label: 'Royalty Vibe', color: '#134E4A', base: 70, range: 29 },
+    { emoji: '🧠', label: 'Sassiness', color: '#D4A574', base: 50, range: 48 },
+    { emoji: '❤️', label: 'Cuddle Score', color: '#FB7185', base: 70, range: 29 },
   ];
   return traits.map((t, i) => {
     const seed = (hash * 31 + i * 17) % t.range;
@@ -160,7 +160,7 @@ export default function CoreFunnel() {
   const progressPct = ((screen + 1) / 7) * 100;
 
   return (
-    <div className="min-h-screen bg-[var(--petgenio-cream)]">
+    <div className="min-h-screen bg-[var(--petgenio-bg)]">
       {/* ─── Top Bar ─── */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-border">
         <div className="max-w-[428px] mx-auto px-4 h-12 flex items-center justify-between">
@@ -241,7 +241,7 @@ function ScreenHome({ onNext }: { onNext: () => void }) {
 
       {/* ── Main CTA ── */}
       <Button size="xl" className="w-full text-white text-lg h-14 rounded-2xl font-bold" onClick={onNext}
-        style={{ backgroundColor: 'var(--petgenio-orange)' }}>
+        style={{ backgroundColor: 'var(--petgenio-teal)' }}>
         Start Dress-Up
       </Button>
 
@@ -337,7 +337,7 @@ function ScreenHome({ onNext }: { onNext: () => void }) {
             <div key={article.title} className="p-4 rounded-xl border border-border bg-white text-left space-y-1.5">
               <div className="flex items-center gap-2">
                 <span className="text-lg">{article.emoji}</span>
-                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--petgenio-orange)' }}>{article.cat}</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wider" style={{ color: 'var(--petgenio-teal)' }}>{article.cat}</span>
               </div>
               <p className="text-sm font-medium text-foreground leading-snug">{article.title}</p>
               <p className="text-xs text-muted-foreground leading-relaxed">{article.excerpt}</p>
@@ -581,7 +581,7 @@ function ScreenCostumeShow({
           </Button>
         </div>
         {requestSubmitted ? (
-          <p className="text-[11px] text-green-600 font-medium text-center">
+          <p className="text-[11px] text-[#0D9488] font-medium text-center">
             Got it! We'll work on "{customRequest || 'your idea'}" and notify you within 24hrs 🎨
           </p>
         ) : (
@@ -688,7 +688,7 @@ function ScreenResult({
           <div className="relative w-24 h-24 mx-auto">
             <div className="absolute inset-0 rounded-full border-4 border-secondary" />
             <div className="absolute inset-0 rounded-full border-4 border-transparent animate-spin"
-              style={{ borderTopColor: 'var(--petgenio-orange)' }} />
+              style={{ borderTopColor: 'var(--petgenio-teal)' }} />
             <span className="absolute inset-0 flex items-center justify-center text-3xl">🎨</span>
           </div>
           <div className="space-y-2">
@@ -701,7 +701,7 @@ function ScreenResult({
         <div className="space-y-5">
           {/* Generated Costume Preview */}
           <Card className="border-0 shadow-xl overflow-hidden">
-            <div className="h-1.5" style={{ backgroundColor: 'var(--petgenio-orange)' }} />
+            <div className="h-1.5" style={{ backgroundColor: 'var(--petgenio-teal)' }} />
             <CardContent className="p-5 space-y-3">
               {generatedImage ? (
                 <div className="space-y-3">
@@ -726,7 +726,7 @@ function ScreenResult({
                 </div>
               ) : (
                 <div className="space-y-3">
-                  <div className="aspect-square rounded-xl bg-gradient-to-b from-purple-50 to-pink-50 flex items-center justify-center">
+                  <div className="aspect-square rounded-xl bg-gradient-to-b from-[#F0FDFA] to-[#E6FFFA] flex items-center justify-center">
                     <div className="text-center">
                       <span className="text-7xl block mb-2">🐱</span>
                       <span className="text-4xl">👑</span>
@@ -744,13 +744,13 @@ function ScreenResult({
             <div className="grid grid-cols-3 gap-2">
               {/* Plush Toy */}
               <button onClick={onNext}
-                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-orange)]/40">
-                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-orange-50 to-amber-50">
+                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-teal)]/40">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-[#F0FDFA] to-[#E6FFFA]">
                   {generatedImage ? (
                     <>
                       <img src={generatedImage} alt="Plush" className="absolute inset-0 w-full h-full object-cover rounded-xl" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-orange-900/20 to-transparent" />
-                      <div className="absolute inset-0 rounded-xl shadow-inner" style={{ boxShadow: 'inset 0 0 20px rgba(237,140,67,0.15)' }} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0D9488]/20 to-transparent" />
+                      <div className="absolute inset-0 rounded-xl shadow-inner" style={{ boxShadow: 'inset 0 0 20px rgba(13,148,136,0.15)' }} />
                     </>
                   ) : (
                     <div className="flex items-center justify-center h-full"><span className="text-4xl">🧸</span></div>
@@ -762,8 +762,8 @@ function ScreenResult({
               </button>
               {/* Phone Case */}
               <button onClick={onNext}
-                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-orange)]/40">
-                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-slate-50 to-gray-100 flex items-center justify-center">
+                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-teal)]/40">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-[#E6FFFA] to-[#F0FDFA] flex items-center justify-center">
                   {generatedImage ? (
                     <div className="relative w-[60%] h-[85%] rounded-[10px] overflow-hidden ring-2 ring-gray-800 shadow-lg">
                       <img src={generatedImage} alt="Phone Case" className="absolute inset-0 w-full h-full object-cover" />
@@ -779,8 +779,8 @@ function ScreenResult({
               </button>
               {/* Key Charm */}
               <button onClick={onNext}
-                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-orange)]/40">
-                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-pink-50 to-rose-50 flex items-center justify-center">
+                className="group p-2 rounded-2xl border-2 border-border bg-white text-center transition-all hover:shadow-lg hover:scale-[1.03] hover:border-[var(--petgenio-teal)]/40">
+                <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-2 bg-gradient-to-b from-[#FFF1F2] to-[#F0FDFA] flex items-center justify-center">
                   {generatedImage ? (
                     <div className="relative flex flex-col items-center">
                       <div className="w-3 h-3 rounded-full border-2 border-gray-400 mb-[-2px] z-10" />
@@ -821,7 +821,7 @@ function ScreenResult({
           </div>
 
           <Button size="xl" className="w-full text-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
-            style={{ backgroundColor: 'var(--petgenio-orange)' }} onClick={onNext}>
+            style={{ backgroundColor: 'var(--petgenio-teal)' }} onClick={onNext}>
             Get {pet.name}'s Merch →
           </Button>
         </div>
@@ -856,9 +856,9 @@ function ScreenConfigure({
       {!selectedProduct ? (
         <div className="space-y-3">
           {[
-            { id: 'plush' as const, emoji: '🧸', title: 'Custom Plush Toy', desc: 'Soft, huggable, one-of-a-kind', price: '$99', gradient: 'from-orange-50 to-amber-50' },
-            { id: 'phone-case' as const, emoji: '📱', title: 'Phone Case', desc: 'Daily carry your cutie', price: '$39', gradient: 'from-slate-50 to-gray-100' },
-            { id: 'keychain' as const, emoji: '🔑', title: 'Key Charm', desc: 'Mini plush Labubu-style', price: '$29', gradient: 'from-pink-50 to-rose-50' },
+            { id: 'plush' as const, emoji: '🧸', title: 'Custom Plush Toy', desc: 'Soft, huggable, one-of-a-kind', price: '$99', gradient: 'from-[#F0FDFA] to-[#E6FFFA]' },
+            { id: 'phone-case' as const, emoji: '📱', title: 'Phone Case', desc: 'Daily carry your cutie', price: '$39', gradient: 'from-[#E6FFFA] to-[#F0FDFA]' },
+            { id: 'keychain' as const, emoji: '🔑', title: 'Key Charm', desc: 'Mini plush Labubu-style', price: '$29', gradient: 'from-[#FFF1F2] to-[#F0FDFA]' },
           ].map(product => (
             <button key={product.id} onClick={() => setSelectedProduct(product.id)}
               className="w-full p-4 rounded-2xl border-2 border-border bg-white text-left flex items-center gap-4 hover:shadow-md transition-all">
@@ -1019,7 +1019,7 @@ function ScreenConfigure({
 
           {/* CTA */}
           <Button size="xl" className="w-full text-white rounded-2xl"
-            style={{ backgroundColor: 'var(--petgenio-orange)' }} onClick={onNext}>
+            style={{ backgroundColor: 'var(--petgenio-teal)' }} onClick={onNext}>
             Checkout — ${PRODUCT_PRICE[selectedProduct]} →
           </Button>
           <p className="text-center text-xs text-muted-foreground">Free shipping · 14-day happiness guarantee</p>
@@ -1102,7 +1102,7 @@ function ScreenCheckout({
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Shipping</span>
-              <span className="text-green-600 font-medium">Free</span>
+              <span className="text-[#0D9488] font-medium">Free</span>
             </div>
             <div className="flex justify-between font-bold text-lg pt-1">
               <span className="text-foreground">Total</span>
@@ -1212,7 +1212,7 @@ function ScreenConfirmed({
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 50}%`,
-                backgroundColor: ['var(--petgenio-orange)', '#FF6B6B', '#4ECDC4', '#FFE66D', '#7C3AED'][i % 5],
+                backgroundColor: ['#0D9488', '#FB7185', '#D4A574', '#14B8A6', '#134E4A'][i % 5],
                 animationDelay: `${Math.random() * 2}s`,
                 animationDuration: `${1 + Math.random() * 2}s`,
               }}
@@ -1243,7 +1243,7 @@ function ScreenConfirmed({
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-muted-foreground">Tracking</span>
-            <span className="font-medium" style={{ color: 'var(--petgenio-orange)' }}>
+            <span className="font-medium" style={{ color: 'var(--petgenio-teal)' }}>
               Will be emailed
             </span>
           </div>
@@ -1261,7 +1261,7 @@ function ScreenConfirmed({
           ].map(item => (
             <div key={item.step} className="flex items-center gap-3 p-3 rounded-xl bg-white border border-border">
               <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                style={{ backgroundColor: 'var(--petgenio-orange)' }}>
+                style={{ backgroundColor: 'var(--petgenio-teal)' }}>
                 {item.step}
               </div>
               <div className="flex-1 text-left">
@@ -1276,7 +1276,7 @@ function ScreenConfirmed({
       {/* ── Re-engagement Hook ── */}
       <div className="space-y-4">
         <div className="p-5 rounded-2xl border-2 text-left space-y-3"
-          style={{ borderColor: 'var(--petgenio-orange)', backgroundColor: 'var(--petgenio-orange)' + '08' }}>
+          style={{ borderColor: 'var(--petgenio-teal)', backgroundColor: 'var(--petgenio-teal)' + '08' }}>
           <div className="flex items-center gap-2">
             <span className="text-2xl">🎁</span>
             <p className="font-bold text-foreground">Earn Points, Get Free Gifts!</p>
@@ -1305,7 +1305,7 @@ function ScreenConfirmed({
             ))}
           </div>
           {shared && (
-            <p className="text-[11px] text-green-600 font-medium text-center">
+            <p className="text-[11px] text-[#0D9488] font-medium text-center">
               ✓ Shared! Thanks for spreading the joy!
             </p>
           )}
@@ -1315,7 +1315,7 @@ function ScreenConfirmed({
         </div>
 
         <Button size="xl" className="w-full text-white rounded-2xl"
-          style={{ backgroundColor: 'var(--petgenio-orange)' }}>
+          style={{ backgroundColor: 'var(--petgenio-teal)' }}>
           Create More Costumes →
         </Button>
       </div>
