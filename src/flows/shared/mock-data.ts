@@ -14,7 +14,7 @@ export const MOCK_CONFIG: ProductConfig = {
   softness: 'medium',
   size: 'standard',
   scent: 'lavender',
-  boxColor: 'orange',
+  boxColor: 'teal',
 };
 
 export const MOCK_ORDER: OrderData = {
